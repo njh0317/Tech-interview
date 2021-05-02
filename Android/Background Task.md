@@ -74,4 +74,5 @@ WorkerManager는 앱이 종료되거나 기기가 다시 시작되는 경우에�
 ---
 ### 출처
 https://developer.android.com/guide/background?hl=ko
+
 https://fornewid.medium.com/workmanager-%EC%A0%95%EB%A6%AC-62e9f6f53767
