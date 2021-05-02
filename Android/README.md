@@ -9,3 +9,4 @@
 4. [Databinding과 Livedata](https://github.com/njh0317/Tech-interview/blob/main/Android/Databinding%EA%B3%BC%20Livedata.md)
 5. [RecyclerView](https://github.com/njh0317/Tech-interview/blob/main/Android/RecyclerView.md)
 6. [Background Task](https://github.com/njh0317/Tech-interview/blob/main/Android/Background%20Task.md)
+7. [UI와 BackgroundThread](https://github.com/njh0317/Tech-interview/blob/main/Android/UI%EC%99%80%20BackgroundThread.md)
