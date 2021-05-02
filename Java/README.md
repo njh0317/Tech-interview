@@ -1,5 +1,7 @@
 # Java
 
+[TOC]
+
 
 ## JVM
 
