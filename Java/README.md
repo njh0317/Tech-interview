@@ -22,7 +22,7 @@
 3. [데이터 타입(primitive, reference)의 종류와 특징?](#데이터-타입primitive-reference의-종류와-특징)
 4. [Wrapper Class란?](#wrapper-class)
 5. [Boxing, UnBoxing?](#boxing-unboxing)
-6. [non-static멤버와 static멤버의 차이?](#nonstatic멤버와-static멤버의-차이)
+6. [non-static멤버와 static멤버의 차이?](#non-static멤버와-static멤버의-차이)
 7. [Java의 main메소드가 static인 이유?](#java의-main메소드가-static인-이유)
 8. [final 키워드의 역할?](#final-키워드의-역할)
 9. [Java의 Generic이란?](#java의-generic이란)
@@ -38,7 +38,7 @@
 19. [==와 equals()의 차이?](#와-equals의-차이)
 20. [Java Reflection(리플렉션)?](#java-reflection리플렉션)
 
-[Object-Oriented Programming](#objectoriented-programming)
+[Object-Oriented Programming](#object-oriented-programming)
 
 1. [OOP의 4가지 특징?](#oop의-4가지-특징)
 2. [OOP의 5대 (설계)원칙?](#oop의-5대-설계원칙)
@@ -498,7 +498,7 @@ Run Time에 다른 클래스를 동적으로 로딩하여 접근할 때, 클래�
 
 </br>
 
-## Object-Oriented Programming
+## Object Oriented Programming
 
 ### OOP의 4가지 특징?
 
