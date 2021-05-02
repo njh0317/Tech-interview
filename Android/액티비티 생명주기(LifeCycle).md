@@ -46,6 +46,12 @@
     [MainActivity] onResume()
     [DetailActivity] onStop()
     [DetailActivity] onDestroy()
+    
+### 안드로이드 생명 주기에 관해 주의해야할 점이 있다면?
+    액티비티가 죽으면 가비지콜렉팅을 해도 레퍼런스가 삭제되서 메모리 환원이 안되므로 onDestroy안에서 System.gc()를 해줘야한다.
+    필요한 메모리 정리를 onDestroy()에서 꼭 해줘야 한다.
+
+
 ---
 
 ### 출처
