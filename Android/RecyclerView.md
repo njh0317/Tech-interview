@@ -1,6 +1,6 @@
 
 # RecyclerView
-보통 리스트뷰를 사용하는데 리스트뷰는 getview, view binding을 계속해서 하게 된다. 이는 성능 저하를 일으키고 따라서 viewholder 패턴을 권장한다. viewholder 패턴을 강제로 하는기 recyclerview이다. viewholder를 미리 몇 개 만들어 놓고 이를 재활용 한다.
+보통 리스트뷰를 사용하는데 리스트뷰는 getview, view binding을 계속해서 하게 된다. 이는 성능 저하를 일으키고 따라서 viewholder 패턴을 권장한다. viewholder 패턴을 강제로 하는 recyclerview이다. viewholder를 미리 몇 개 만들어 놓고 이를 재활용 한다.
 
 ## 주요 클래스
 1. Adapter - 기존의 ListView에서 사용하는 Adapter와 같은 개념으로 데이터와 아이템에 대한 View 생성
