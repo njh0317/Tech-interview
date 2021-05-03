@@ -6,4 +6,4 @@
 
 ### 목차
 1. [빅오 표기법](https://github.com/njh0317/Tech-interview/blob/main/Algorithm/%EB%B9%85%EC%98%A4%20%ED%91%9C%EA%B8%B0%EB%B2%95.md)
-2. [정렬 알고리즘]()
+2. [정렬 알고리즘](https://github.com/njh0317/Tech-interview/blob/main/Algorithm/%EC%A0%95%EB%A0%AC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.md)
