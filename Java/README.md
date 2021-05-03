@@ -3,9 +3,7 @@
 [JVM](#jvm)
 
 1. [JVM의 기능은?](#jvm의-기능은)
-
 2. [자바 컴파일 과정을 설명해보세요.](#자바-컴파일-과정을-설명해보세요)
-
 3. [JVM 메모리 영역을 설명해보세요.](#jvm-메모리-영역을-설명해보세요)
 
 [Garbage Collection](#garbage-collection)
