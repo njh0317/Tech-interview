@@ -10,4 +10,3 @@
 3. [탐색 알고리즘](https://github.com/njh0317/Tech-interview/blob/main/Algorithm/%ED%83%90%EC%83%89%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.md)
 4. [Spanning Tree](https://github.com/njh0317/Tech-interview/blob/main/Algorithm/Spanning%20Tree.md)
 5. [최단 경로 알고리즘](https://github.com/njh0317/Tech-interview/blob/main/Algorithm/%EC%B5%9C%EB%8B%A8%20%EA%B2%BD%EB%A1%9C%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.md)
-6. [우선순위 큐](https://github.com/njh0317/Tech-interview/blob/main/Algorithm/%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84%20%ED%81%90.md)
