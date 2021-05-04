@@ -2,7 +2,7 @@
 
 1. [Array vs LinkedList](#array-vs-linkedlist)
 
-   * [Array (배열)](#array배열)
+   * [Array (배열)](#array-배열)
 
    * [LinkedList](#linkedlist)
 
