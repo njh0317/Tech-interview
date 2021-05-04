@@ -1,7 +1,7 @@
 # Data Structure
 
 1. [Array vs LinkedList](#array-vs-linkedlist)
-* [Array (배열)](#array-배열)
+   * [Array (배열)](#array-배열)
    * [LinkedList](#linkedlist)
    * [Array와 LinkedList 차이점?](#array와-linkedlist-차이점)
    * [결론](#결론)
