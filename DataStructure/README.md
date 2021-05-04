@@ -38,8 +38,8 @@
     * [AVL Tree](#avl-tree)
     * [Red-Black Tree](#red-black-tree)
     * [B Tree](#b-tree)
-    * [B+ Tree](#b+tree)
-    * [B Tree와 B+Tree의 공통점, 차이점](#b-tree와-b+tree의-공통점-차이점)
+    * [B+ Tree](#btree)
+    * [B Tree와 B+Tree의 공통점, 차이점](#b-tree와-btree의-공통점-차이점)
 
 ## Array vs LinkedList
 
