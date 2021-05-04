@@ -21,6 +21,7 @@
 4. [Stack](#stack)
 5. [Queue](#queue)
 6. [Priority Queue](#priority-queue)
+    * [힙으로 구현하는 이유?](#힙으로-구현하는-이유)
 7. [Graph](#graph)
    * [관련 용어](#관련-용어)
    * [특징](#특징)
