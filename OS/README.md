@@ -5,7 +5,8 @@
 2. [프로세스와 스레드](https://github.com/njh0317/Tech-interview/blob/main/OS/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80%20%EC%8A%A4%EB%A0%88%EB%93%9C.md)
 3. [프로세스 동기화](https://github.com/njh0317/Tech-interview/blob/main/OS/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%20%EB%8F%99%EA%B8%B0%ED%99%94.md)
 4. [Deadlock](https://github.com/njh0317/Tech-interview/blob/main/OS/Deadlock.md)
-5. [CPU 스케줄링](https://github.com/njh0317/Tech-interview/blob/main/OS/CPU%20%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81.md)
-6. [메모리]()
-7. [가상 메모리]()
+5. [뮤텍스와 세마포](https://github.com/njh0317/Tech-interview/blob/main/OS/)
+6. [CPU 스케줄링](https://github.com/njh0317/Tech-interview/blob/main/OS/CPU%20%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81.md)
+7. [메모리]()
+8. [가상 메모리]()
 
