@@ -36,7 +36,7 @@
 19. [==와 equals()의 차이?](#와-equals의-차이)
 20. [Java Reflection(리플렉션)?](#java-reflection리플렉션)
 21. [생성자?](#생성자)
-22. [this vs super](#)
+22. [this vs super](#this-vs-super)
 
 [Object-Oriented Programming](#object-oriented-programming)
 
