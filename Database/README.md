@@ -60,7 +60,8 @@
    * [ORM의 장점](#ORM의-장점)
    * [ORM의 단점](#ORM의-단점)
 9. [JDBC](#jdbc)
-   * 
+   * [JDBC란?](#jdbc란)
+   * [JDBC를 이용한 DB 접근](#jdbc를-이용한-db-접근)
 
 ## 데이터베이스 풀
 
