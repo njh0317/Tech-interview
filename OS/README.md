@@ -9,6 +9,5 @@
 6. [CPU 스케줄링](https://github.com/njh0317/Tech-interview/blob/main/OS/CPU%20%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81.md)
 7. [메모리](https://github.com/njh0317/Tech-interview/blob/main/OS/%EB%A9%94%EB%AA%A8%EB%A6%AC.md)
 8. [가상 메모리](https://github.com/njh0317/Tech-interview/blob/main/OS/%EA%B0%80%EC%83%81%20%EB%A9%94%EB%AA%A8%EB%A6%AC.md)
-9. [페이지 교체 알고리즘](https://github.com/njh0317/Tech-interview/blob/main/OS/%ED%8E%98%EC%9D%B4%EC%A7%80%20%EA%B5%90%EC%B2%B4%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.md)
-10. [프레임 할당](https://github.com/njh0317/Tech-interview/blob/main/OS/%ED%94%84%EB%A0%88%EC%9E%84%20%ED%95%A0%EB%8B%B9.md)
+9. [프레임 할당](https://github.com/njh0317/Tech-interview/blob/main/OS/%ED%94%84%EB%A0%88%EC%9E%84%20%ED%95%A0%EB%8B%B9.md)
 
