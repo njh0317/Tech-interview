@@ -9,4 +9,6 @@
 6. [CPU 스케줄링](https://github.com/njh0317/Tech-interview/blob/main/OS/CPU%20%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81.md)
 7. [메모리]()
 8. [가상 메모리]()
+9. [페이지 교체 알고리즘]()
+10. [프레임 할당]()
 
