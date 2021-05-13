@@ -715,6 +715,34 @@ RESTful은 REST를 REST답게 쓰기 위한 방법으로, 누군가가 공식적
 * CRUD기능을 모두 POST로만 처리하는 API
 * route에 resource, id 외의 정보가 들어가는 경우
 
+
+URI와 URL의 차이?(참고)
+
+<img src="https://user-images.githubusercontent.com/33089715/118091699-16c8e480-b406-11eb-9f23-cfccab242166.png"
+     width="200">
+
+![image](https://user-images.githubusercontent.com/33089715/118091811-3cee8480-b406-11eb-8832-8520653a2fc2.png)
+
++ URI (Uniform Resource Identifier) : 인터넷 자원을 나타내는 고유 식별자이다. 인터넷에 있는 id라고 생각하면 되기 때문에, URI는 유일하다. 
+
++ URL (Uniformed Resource Locator)
+   + 프로토콜 포함
+   + 해당 자원의 위치, Path를 의미
+   + 일반적으로 사이트 도메인을 자주 의미함.
+   + 웹 상 뿐만 아니라 컴퓨터 네트워크상의 자원은 모두 나타낼 수 있다.
+
++ URN (Uniformed Resource Name)
+   + 프로토콜 포함 X
+   + 해당 자원의 이름을 의미
+   + 독립적인 자원 지시자
+   + Page 이후 부분까지 포함
+
++ 정리 :
+1. URI 는 네트워크 상 자원을 가리키는 일종의 고유 식별자(ID) 이다.
+
+2. URL, URN 은 URI 에 포함되는 개념이며 URL 은 자원의 위치, URN 은 자원의 이름 을 의미한다. 
+
+출처 : https://programming119.tistory.com/194
 </br>
 
 ## SOCKET
