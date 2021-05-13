@@ -581,6 +581,21 @@ DNS 서버에 도메인을 등록한 후에, 도메인으로 접근하게 되면
 
 DNS 네임 서버는 도메인을 위한 DNS 레코드를 저장하는 서버로 데이터베이스에 대한 쿼리의 응답정보와 함께 응답한다.
 
+### 작동원리
+![image](https://user-images.githubusercontent.com/33089715/118097776-12082e80-b40e-11eb-8101-433119bc57eb.png)
+
+1. 웹 브라우저에 www.naver.com을 입력하면 Local DNS에게 "www.naver.com"이라는 hostname에 대한 IP 주소를 질의, Local DNS에 없으면 다른 DNS name 서버 정보를 받음(Root DNS 정보를 전달 받음)
+
+   > Root DNS는 인터넷의 도메인 네임 시스템의 루트존, 루트 존의 레코드 요청에 직접 응답하고 적절한 최상위 도메인에 대해 권한이 있는 네임 서버 목록을 반환
+
+2. Root DNS 서버에 "www.naver.com" 질의
+3. Root DNS 서버로 부터 "com 도메인"을 관리하는 TLD(Top-Level Domain) 이름 서버 정보를 전달 받음
+4. TLD에 "www.naver.com" 질의
+5. TLD엣 "name.com" 관리하는 DNS 정보 전달
+6. "naver.com" 도메인을 관리하는 DNS 서버에 "www.naver.com" 호스트 네임에 대한 IP 주소 질의
+7. Local DNS 서버에게 www.naver.com의 IP 주소 응답
+8. Local DNS 서버는 www.naver.com에 대한 IP 주소 캐싱하고 IP 주소 정보 전달
+
 </br>
 
 ## REST, REST API, RESTful
