@@ -30,6 +30,7 @@
 7. [DNS](#dns)
    * [DNS란?](#dns란)
    * [DNS 프로세스](#dns-프로세스)
+   * [작동원리](#작동원리)
 8. [REST, REST API, RESTful](#rest-rest-api-restful)
    * [REST (Representational State Transfer)](#rest-representational-state-transfer)
    * [REST API](#rest-api)
