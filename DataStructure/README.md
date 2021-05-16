@@ -829,7 +829,7 @@ top, pop에서 추출되는 원소는 제일 먼저 들어왔던게 아니라 �
 
 자신(Z)과 부모 노드(V)가 레드라면, (레드는 중복될 수 없으므로 연산으로 처리해주어야 함)
 
-1. **삼촌 노드(W)가 블랙일 때 → Restructuring(Rotation)**
+1. **삼촌 노드(W)가 블랙일 때 또는 삼촌 노드가 null일 때 → Restructuring(Rotation)**
 
    <img src="https://user-images.githubusercontent.com/33208360/116959415-8e956180-acd8-11eb-9edf-a540e3e36d7d.png" alt="image" style="zoom:33%;" />
 
