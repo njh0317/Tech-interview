@@ -849,6 +849,14 @@ top, pop에서 추출되는 원소는 제일 먼저 들어왔던게 아니라 �
 
    ​	(이때 Root라면, "Root는 블랙"이라는 규칙에 위배되므로 다시 검정으로 변경한다.)
 
+## AVL Tree와 Red Black Tree 차이?
+
+- AVL Tree가 Red Black Tree보다 빠른 Search를 제공
+    - AVL Tree가 더 엄격한 Balanced를 유지
+- Red Black Tree은 AVL Tree보다 빠른 삽입과 제거
+    - Red Black Tree보다 Balanced를 느슨하게 유지하고 있기 
+- Red Black Trees는 대부분의 언어의 map, multimap, multiset에서 사용하고 있다.
+- AVL tree는 조회에 속도가 중요한 Database에서 사용하고 있다.
 </br>
 
 ## B-Tree
