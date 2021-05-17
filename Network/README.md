@@ -197,7 +197,7 @@ TCP(Transmission Control Protocol)와 UDP(User Datagram Protocol) 두 프로토�
 
 * 예약 필드(Reserved): 사용을 하지 않지만 나중을 위한 예약 필드이며 0으로 채워져야 한다.
 * 제어 비트(Flag Bit): SYN, ACK, FIN등의 제어 번호
-* 윈도우 크기(Window): 수신 윈도우의 버퍼 크기를 지정할 때 사용. 0아면 송신 프로세스의 전송 중지.
+* 윈도우 크기(Window): 수신 윈도우의 버퍼 크기를 지정할 때 사용. 0면 송신 프로세스의 전송 중지.
 * 체크섬(Checksum): TCP 세그먼트에 포함되는 프로토콜 헤더와 데이터에 대한 오류 검출 용도
 * 긴급 위치(Urgent Pointer): 긴급 데이터를 처리하기 위함. URG 플래그 비트가 지정된 경우에만 유효
 
