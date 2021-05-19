@@ -8,8 +8,8 @@
    * [세션 계층 (Session Layer)](#세션-계층-session-layer)
    * [표현 계층 (Presentation Layer)](#표현-계층-presentation-layer)
    * [응용 계층 (Application Layer)](#응용-계층-application-layer)
-2. [TCP/IP 모델](#tcpip-모델)
-3. [Data Fragmentation(+Segmentation)(단편화)(분할) / Reassembly(병합)(재조립)(재결합) 이란?](#data-fragmentationsegmentation단편화분할--reassembly병합재조립재결합-이란)
+2. [Data Fragmentation(+Segmentation)(단편화)(분할) / Reassembly(병합)(재조립)(재결합) 이란?](#data-fragmentationsegmentation단편화분할--reassembly병합재조립재결합-이란)
+3. [TCP/IP 모델](#tcpip-모델)
 4. [TCP와 UDP](#tcp와-udp)
    * [TCP](#tcp)
    * [UDP](#udp)
@@ -119,23 +119,6 @@
 * 응용 프로세스와 직접 관계하여 일반적인 응용 서비스를 수행한다.
 * 일반적인 응용 서비스는 관련된 응용 프로세스들 사이의 전환을 제공한다.
 
-## TCP/IP 모델
-
-OSI 모델은 참조 모델일 뿐 실제 사용되는 인터넷 프로토콜은 7계층 구조를 완전히 따르지는 않는다. 인터넷 프로토콜 스택은 현재 대부분 TCP/IP를 따른다.
-
-* 인터넷 프로토콜 중 가장 중요한 역할을 하는 TCP와 IP의 합성어로, 데이터의 흐름 관리, 정확성 확인, 패킷의 목적지 보장을 담당한다.
-
-  * 데이터의 정확성 확인은 TCP
-  * 패킷을 목적지까지 전송하는 일은 IP가 담당한다.
-
-* TCP/IP의 4계층
-
-  <img src="https://user-images.githubusercontent.com/33208360/117919310-ba8f9300-b327-11eb-9cf3-7baec27477c3.png" alt="image" style="zoom: 50%;" />
-  
-  * TCP/IP는 OSI 참조 모델과 달리 Applcation 계층 하나에서 Application, Presentation, Session 계층의 구현을 다 하고 있다.
-  
-  * 데이터는 단계별로 헤더(Data -> Segment -> Datagram -> Frame)를 붙여 전송하며 이를 **데이터 캡슐화** 라고 한다.
- 
 ## Data Fragmentation(+Segmentation)(단편화)(분할) / Reassembly(병합)(재조립)(재결합) 이란?
 
 > https://blog.naver.com/sung_mk1919/221435640417
@@ -156,7 +139,7 @@ OSI 모델은 참조 모델일 뿐 실제 사용되는 인터넷 프로토콜은
 
 일어나며 (UDP는 3계층에서 재조립됩니다.) 분할되서 온 데이터들을 분할 시 TCP 헤더에 부여된 Sequence Number를 기준으로 재조립을 합니다. (UDP는 단방향 프로토콜로 비연결지향 프로토콜입니다. 구조에도 확인할 수 있듯이 Sequence Number가 없습니다. 보낸 후의 뒷일은 생각하지 않는다고 보시면 됩니다.)
 
-### ★요약
+### 요약
 
 TCP 프로토콜을 이용한 통신을 할 때, 데이터를 Segment로 분할하여 만드는 과정을 Segmentation이라고 합니다.
 
@@ -175,6 +158,23 @@ TCP/UDP 프로토콜과 무관하게 라우터(송신 장비와 다른 장비)�
 즉, TCP 프로토콜을 이용한 통신일 때는 Segmentation을 수행하고 전송 중에서도 Packet Size가 크면 지나치는 라우터에서 Fragmentation이 일어날 수 있으며, UDP 프로토콜을 이용한 통신일 때 Fragmentation을 수행하고 전송 중에서도 Packet Size가 크면 지나치는 라우터에서 Fragmentation이 일어날 수 있습니다.
 
 다르게 말하면 TCP 프로토콜에서는 4계층에서 Fragmentation 대신 Segmentation만 일어나지만, UDP 프로토콜에서는 Segmentation 대신 3계층에서 Fragmentation가 일어납니다.
+
+## TCP/IP 모델
+
+OSI 모델은 참조 모델일 뿐 실제 사용되는 인터넷 프로토콜은 7계층 구조를 완전히 따르지는 않는다. 인터넷 프로토콜 스택은 현재 대부분 TCP/IP를 따른다.
+
+* 인터넷 프로토콜 중 가장 중요한 역할을 하는 TCP와 IP의 합성어로, 데이터의 흐름 관리, 정확성 확인, 패킷의 목적지 보장을 담당한다.
+
+  * 데이터의 정확성 확인은 TCP
+  * 패킷을 목적지까지 전송하는 일은 IP가 담당한다.
+
+* TCP/IP의 4계층
+
+  <img src="https://user-images.githubusercontent.com/33208360/117919310-ba8f9300-b327-11eb-9cf3-7baec27477c3.png" alt="image" style="zoom: 50%;" />
+  
+  * TCP/IP는 OSI 참조 모델과 달리 Applcation 계층 하나에서 Application, Presentation, Session 계층의 구현을 다 하고 있다.
+  
+  * 데이터는 단계별로 헤더(Data -> Segment -> Datagram -> Frame)를 붙여 전송하며 이를 **데이터 캡슐화** 라고 한다.
 
 </br>
 
