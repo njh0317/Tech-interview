@@ -138,6 +138,8 @@ OSI 모델은 참조 모델일 뿐 실제 사용되는 인터넷 프로토콜은
  
 ## Data Fragmentation(+Segmentation)(단편화)(분할) / Reassembly(병합)(재조립)(재결합) 이란?
 
+> https://blog.naver.com/sung_mk1919/221435640417
+
 ★TCP와 UDP 일 때 분할되는 시기, 위치가 다릅니다. ★
 
 ### Segmentation / Fragmentation
