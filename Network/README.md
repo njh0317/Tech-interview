@@ -9,7 +9,7 @@
    * [표현 계층 (Presentation Layer)](#표현-계층-presentation-layer)
    * [응용 계층 (Application Layer)](#응용-계층-application-layer)
 2. [TCP/IP 모델](#tcpip-모델)
-3. [Data Fragmentation(+Segmentation)(단편화)(분할) / Reassembly(병합)(재조립)(재결합) 이란?]()
+3. [Data Fragmentation(+Segmentation)(단편화)(분할) / Reassembly(병합)(재조립)(재결합) 이란?](#data-fragmentationsegmentation단편화분할--reassembly병합재조립재결합-이란)
 4. [TCP와 UDP](#tcp와-udp)
    * [TCP](#tcp)
    * [UDP](#udp)
@@ -83,7 +83,7 @@
 
 * 여러 개의 노드를 거칠 때마다 경로를 찾아주는 역할을 하는 계층으로 다양한 길이의 데이터를 네트워크들을 통해 전달하고, 그 과정에서 전송 계층이 요구하는 서비스 품질(QoS)을 제공하기 위한 기능적, 절차적 수단을 제공한다.
 
-* 라우팅, 흐름 제어, 세그맨테이션(Segmentation/Desegmentation), 오류 제어, 인터네트워킹(InterNetworking) 등을 수행한다.
+* 라우팅, 흐름 제어, 프래그멘테이션(Fragmentation), 오류 제어, 인터네트워킹(InterNetworking) 등을 수행한다.
 * 논리적인 주소 구조(IP), 곧 네트워크 관리자가 직접 주소를 할당하는 구조를 가지며, 계층적이다.
 * 데이터 전송 단위는 Datagram(Packet)이다.
 
@@ -92,6 +92,8 @@
 * 양 끝단(End to end)의 사용자들이 신뢰성있는 데이터를 주고 받을 수 있도록 해주어, 상위 계층들이 데이터 전달의 유효성이나 효율성을 생각하지 않도록 해준다.
 
 * 시퀀스 넘버 기반의 오류 제어 방식을 사용한다.
+
+* 세그멘테이션을 한다.
 
 * 전송 계층은 특정 연결의 유효성을 제어하고, 일부 프로토콜은 상태 개념이 있고(Stateful), 연결 기반(connection oriented)이다.
 
