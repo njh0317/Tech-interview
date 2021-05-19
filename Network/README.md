@@ -132,6 +132,44 @@ OSI 모델은 참조 모델일 뿐 실제 사용되는 인터넷 프로토콜은
   * TCP/IP는 OSI 참조 모델과 달리 Applcation 계층 하나에서 Application, Presentation, Session 계층의 구현을 다 하고 있다.
   
   * 데이터는 단계별로 헤더(Data -> Segment -> Datagram -> Frame)를 붙여 전송하며 이를 **데이터 캡슐화** 라고 한다.
+ 
+## Data Fragmentation(+Segmentation)(단편화)(분할) / Reassembly(병합)(재조립)(재결합) 이란?
+
+★TCP와 UDP 일 때 분할되는 시기, 위치가 다릅니다. ★
+
+### Segmentation / Fragmentation
+
+데이터의 사이즈가 (기존 MTU 기준보다) 큰 사이즈일 시 L3, L2에서 데이터를 수용하기 위해서 거대한 데이터를 MTU 단위로 분할합니다. 이를 Segmentation / Fragmentation이라고 합니다. 혹은 단편화라고도 부릅니다. 쉽게 분할로 부르겠습니다.
+
+(Segmentation 항목을 추가된 이유는 분할하는 개념은 Fragmentation과 같지만 프로토콜 종류에 따라 수행되는 위치와 이름이 달라지기 때문에 추가되었습니다.)
+
+​Segmentation 같은 경우는 TCP 프로토콜을 이용한 통신일 때 사용되는 분할로서 분할된 데이터는 Segment로 불리며 이 작업은 4계층 프로토콜 자체에서 수행됩니다. Fragmentation은 UDP 프로토콜을 이용한 통신일 때 사용되는 분할로서 분할된 데이터는 Packet으로 불리며 이 작업은 3계층 프로토콜 자체에서 수행됩니다. 라우터도 3계층 밖에 존재하지 않기 때문에 3계층에서 Fragmentation가 일어날 수 있습니다. TCP의 통신일 경우는 송신 장비가 상대 장비의 MTU와 비교해 상대측의 MTU가 낮으면 상대 장비의 MTU로 맞춥니다. 또한, 상대 장비뿐만 아니라 TCP 3way-handshaking을 할 때 경로에 있는 라우터들의 MTU 탐색을 한 뒤에 추후 라우터에서 분할을 시도합니다. (신뢰성 통신의 근거) 그러나 UDP의 통신일 경우는 상대 장비의 MTU를 고려하지 않고 송신하기 때문에 빠르지만 불안정하며 언제든지 데이터 전송 실패로 이어질 수 있습니다. 또한, 데이터를 그대로 3계층에 보내고 3계층에서 경로 MTU탐색을 한 뒤에 추후 라우터에서 분할 및 전송을 합니다.
+
+### Reassembly
+
+데이터의 사이즈가 (기존 MTU 기준보다) 큰 사이즈일 시 L3, L2에서 데이터를 수용하기 위해서 데이터를 Fragmentation한 상태로 보냅니다. 이 분할된 데이터를 그대로 수용할 수 없고 다시 Reassembly (편의상 재조립으로 부르겠습니다.) 하여 완성된 데이터를 상대방이 그대로 수용합니다. 이는 3, 4계층 그리고 라우터에서
+
+일어나며 (UDP는 3계층에서 재조립됩니다.) 분할되서 온 데이터들을 분할 시 TCP 헤더에 부여된 Sequence Number를 기준으로 재조립을 합니다. (UDP는 단방향 프로토콜로 비연결지향 프로토콜입니다. 구조에도 확인할 수 있듯이 Sequence Number가 없습니다. 보낸 후의 뒷일은 생각하지 않는다고 보시면 됩니다.)
+
+### ★요약
+
+TCP 프로토콜을 이용한 통신을 할 때, 데이터를 Segment로 분할하여 만드는 과정을 Segmentation이라고 합니다.
+
+이는 송신 장비의 4계층 전송 계층에서 이루어집니다.
+
+UDP 프로토콜을 이용한 통신을 할 때, 데이터를 Packet으로 분할하여 만드는 과정을 Fragmentation이라고 합니다.
+
+이는 송신 장비의 3계층 인터넷 계층에서 이루어집니다.
+
+TCP/UDP 프로토콜과 무관하게 라우터(송신 장비와 다른 장비)에서​ 이전 장비에서 받는 Packet이 클 때,
+
+더 작은 Packet으로 분할하여 만드는 과정을 Fragmentation이라고 합니다.
+
+
+
+즉, TCP 프로토콜을 이용한 통신일 때는 Segmentation을 수행하고 전송 중에서도 Packet Size가 크면 지나치는 라우터에서 Fragmentation이 일어날 수 있으며, UDP 프로토콜을 이용한 통신일 때 Fragmentation을 수행하고 전송 중에서도 Packet Size가 크면 지나치는 라우터에서 Fragmentation이 일어날 수 있습니다.
+
+다르게 말하면 TCP 프로토콜에서는 4계층에서 Fragmentation 대신 Segmentation만 일어나지만, UDP 프로토콜에서는 Segmentation 대신 3계층에서 Fragmentation가 일어납니다.
 
 </br>
 
