@@ -12,4 +12,4 @@
 7. [UI와 BackgroundThread](https://github.com/njh0317/Tech-interview/blob/main/Android/UI%EC%99%80%20BackgroundThread.md)
 8. [Service](https://github.com/njh0317/Tech-interview/blob/main/Android/Service.md)
 9. [Coroutine](https://github.com/njh0317/Tech-interview/blob/main/Android/Coroutine.md)
-10. [Kotlin](https://github.com/njh0317/Tech-interview/blob/main/Android/Kotlin.md))
+10. [Kotlin](https://github.com/njh0317/Tech-interview/blob/main/Android/Kotlin.md)
