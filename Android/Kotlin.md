@@ -1,5 +1,23 @@
 # Kotlin
-
+## 목차
+1. [Data Class](#)
+    + [특징](#)
+    + [데이터 분해 및 대입(Destructuring Declarations)](#)
+2. [cope Funcitons](#)
+    + [일반적인 사용 방식](#)
+    + [1. let](#)
+    + [2. with](#)
+    + [3. run](#)
+    + [4. apply](#)
+    + [5. also](#)
+3. [초기화 지연 - lateinit, lazy]()
+    + [Late initialization](#)
+        + [lateinit의 특징](#)
+        + [lateinit의 동작 원리](#)
+    + [Lazy initialization](#)
+        + [lazy init의 구현 원리](#)
+        + [lazy init의 특징](#)
+    + [lateinit vs lazy](#)
 ## Data Class
 데이터 클래스(Data class)는 데이터 보관 목적으로 만든 클래스를 의미한다. 데이터 클래스는 프로퍼티에 대한 toString(), hashCode(), equals(), copy() 메소드를 자동으로 만들어 준다. 그래서 boilerplate code를 만들지 않아도 된다.
 
@@ -260,6 +278,200 @@ numbers
     .add("four")
 ```
 
+## 초기화 지연 - lateinit, lazy
++ 코틀린에서는 변수 선언을 먼저하고 초기화는 뒤로 미루는 기능들을 제공한다. 
++ 장점 : 사용할지 모르는 데이터를 미리 초기화할 필요가 없어서 성능 향상에 도움이 됩니다. 
+    + 예를 들어, Rest API로 GitHub의 데이터를 가져오는 기능이 있는데, 앱이 실행했을 때 미리 가져오는 것보다 데이터를 화면에 보여줄 때 가져오는 것이 CPU 자원도 아끼고, 네트워크 자원도 아낄 수 있다.
+
+코틀린에서 제공하는 초기화 지연
+
++ Late initialization : 필요할 때 초기화하고 사용할 수 있음. 초기화하지 않고 쓰면 Exception 발생
++ Lazy initialization : 변수를 선언할 때 초기화 코드도 함께 정의. 변수가 사용될 때 초기화 코드 동작하여 변수가 초기화됨
+
+### Late initialization
+**late initialization**은 `var` 앞에 `lateinit`을 붙여 변수를 선언한다. 
+```kotlin
+class Rectangle {
+    lateinit var area: Area
+    fun initArea(param: Area): Unit {
+        this.area = param
+    }
+}
+
+class Area(val value: Int)
+
+fun main() {
+    val rectangle = Rectangle()
+    rectangle.initArea(Area(10))
+    println(rectangle.area.value)
+}
+```
++ lateinit var area로 선언하고 초기값을 지정하지 않았다.
++ 이 변수는 nullable이 아니기 때문에 초기값을 할당하지 않으면 에러가 발생한다. 하지만 lateinit를 붙여 나중에 초기화하겠다고 컴파일러에게 말했기 때문에 컴파일 에러가 발생하지 않는다.
++ main에서 rectangle.initArea(Area(10))로 늦게 변수를 초기화하고 그 다음 줄에 Area 객체를 사용
+
+#### **lateinit의 특징**
++ var 에만 사용 가능
++ primitive type에 적용 불가. 
+    + primitive type은 Int, Boolean, Double 등의 코틀린에서 제공하는 기본적인 타입
++ 따라서, 아래처럼 val을 사용하거나, Int를 사용한 코드는 컴파일 에러가 발생
+``` kotlin
+lateinit val area : Area    // compile error
+lateinit var width : Int    // compile error
+```
++ Custom getter/setter를 만들 수 없다.
++ Non-null 프로퍼티만 사용 가능
++ 따라서 아래 코드들은 컴파일 에러
+```kotlin
+lateinit var area: Area?    // compile error
+lateinit var area: Area     // compile error
+  get() {
+      area;
+  }
+```
+
+#### **lateinit의 동작 원리**
++ 자바로 디컴파일된 코드
+```java
+public final class Area {
+   private final int value;
+
+   public final int getValue() {
+      return this.value;
+   }
+
+   public Area(int value) {
+      this.value = value;
+   }
+}
+
+public final class Rectangle {
+   @NotNull
+   public Area area;
+
+   @NotNull
+   public final Area getArea() {
+      Area var10000 = this.area;
+      if (var10000 == null) {
+         Intrinsics.throwUninitializedPropertyAccessException("area");
+      }
+
+      return var10000;
+   }
+
+   public final void setArea(@NotNull Area var1) {
+      Intrinsics.checkParameterIsNotNull(var1, "<set-?>");
+      this.area = var1;
+   }
+      public final void initArea(@NotNull Area param) {
+      Intrinsics.checkParameterIsNotNull(param, "param");
+      this.area = param;
+   }
+}
+
+public static final void main() {
+   Rectangle rectangle = new Rectangle();
+   rectangle.initArea(new Area(10));
+   int var1 = rectangle.getArea().getValue();
+   System.out.println(var1);
+}
+
+```
++ public Area area로 변수가 초기화되지 않은 상태로 선언
++ 중요 코드는 다음 코드
+    ```java
+    public final Area getArea() {
+        Area var10000 = this.area;
+        if (var10000 == null) {
+            Intrinsics.throwUninitializedPropertyAccessException("area");
+        }
+
+        return var10000;
+    }
+    ```
++ Area.getArea()으로 Area 객체를 가져올 때 null check를 하고 있다.
+    + null이면 Exception을 던진다. Area를 가져올 때는 모두 getArea()를 사용하기 때문에 초기화 전에 쓰려고 시도하면 예외가 발생하는 것을 알 수 있다. 이 때문에 custom getter/setter가 제한하였다는 것을 추측해볼 수 있다. 
++ 또한 코틀린에서 nullable 프로퍼티를 사용하지 못한 것은 객체가 null로 초기화되면, null check로 초기화가 되었는지 구분을 하지 못하기 때문이다.
+
+### Lazy initialization
+**Lazy initialization**은 프로퍼티를 정의할 때 초기화 코드도 함께 정의한다. 그리고 프로퍼티가 처음 사용될 때 초기화 구문이 실행되면서 초기값이 할당된다.
+
++ 아래 코드처럼 lazy init을 사용할 수 있다. 
++ 초기값 대신에 by lazy { ... }를 입력한다.
+    + { ... } 부분은 변수가 처음 사용될 때 한번 호출되며 마지막의 값이 초기값으로 할당된다.
++ 아래 예제에서는 balance에 100이 할당된다.
+```kotlin
+val balance : Int by lazy {
+    println("Setting balance!")
+    100
+}
+```
++ {...}는 처음 사용할 때 한번만 호출되고 두번째 사용할 때는 호출되지 않는다. 
++ 다음은 Account.balance를 두번 출력한 코드와 결과
+```kotlin
+class Account() {
+    val balance : Int by lazy {
+        println("Setting balance!")
+        100
+    }
+}
+
+fun main() {
+    val account = Account()
+    println(account.balance)
+    println(account.balance)
+}
+```
+```
+Setting balance! //한번 출력
+100
+100
+```
+
+#### **lazy init의 구현 원리**
++ 코틀린 코드를 자바로 디컴파일한 결과입니다. 
++ getBalance()가 처음 불릴 때 초기화 코드가 동작하여 할당
+```kotlin
+public final class Account {
+   @NotNull
+   private final Lazy balance$delegate;
+
+   public Account() {
+      this.balance$delegate = LazyKt.lazy((Function0)null.INSTANCE);
+   }
+
+   public final int getBalance() {
+      Lazy var1 = this.balance$delegate;
+      return ((Number)var1.getValue()).intValue();
+   }
+}
+
+public static final void main() {
+   Account account = new Account();
+   int var1 = account.getBalance();
+   System.out.println(var1);
+   var1 = account.getBalance();
+   System.out.println(var1);
+}
+```
++ getBalance()에서 ((Number)var1.getValue()).intValue()가 balance의 값을 리턴하는 것으로 보이며, 초기값이 할당되지 않았을 때 내부에서 초기화 코드를 호출하는듯..?
+
+#### **lazy init의 특징**
++ val 프로퍼티만 사용할 수 있음
++ primitive type(Int, Boolean 등)도 사용 가능
++ Non-null, Nullable 모두 사용 가능
+
+    + private final Lazy으로 객체를 선언하고 초기화도 한 상태이다. 이 때문에 변하지 않는 val만 사용가능.
+    + 또, 그 객체의 메소드가 어떤 값을 리턴하기 때문에 primitive type도 사용
+
+### lateinit vs lazy
++ lazy는 val 프로퍼티에만 사용할 수 있지만, lateinit은 var에만 사용할 수 있다.
+그렇기 때문에 lateinit은 immutable(불변) 프로퍼티가 아니다.
++ lateinit은 nullable 또는 primitive type의 프로퍼티를 사용할 수 없다. 반면에 lazy는 모두 가능하다.
++ lateinit은 직접적으로 프로퍼티를 갖고 있는 구조지만(자바에서 field를 갖고 있음), lazy는 Lazy라는 객체 안에 우리가 선언한 field를 갖고 있다. 그래서 lazy의 프로퍼티를 직접 변경할 수 없다.
+
 ---
 ### 출처
 https://blog.yena.io/studynote/2020/04/15/Kotlin-Scope-Functions.html
+
+https://codechacha.com/ko/kotlin-late-init/
