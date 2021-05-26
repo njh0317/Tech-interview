@@ -18,6 +18,18 @@
         + [lazy init의 구현 원리](#lazy-init의-구현-원리)
         + [lazy init의 특징](#lazy-init의-특징)
     + [lateinit vs lazy](#lateinit-vs-lazy)
+4. [Null safety](#)
+    + [Nullable과 Non-Nullable 프로퍼티](#)
+    + [코틀린에서 Null Pointer Exception(NPE)이 발생하는 경우](#)
+    + [nullable 타입을 non-nullable 타입으로 변경하기](#)
+    + [안전하게 nullable 프로퍼티 접근하기](#)
+        + [1. 조건문으로 nullable 접근](#)
+        + [2. Safe call 연산자로 nullable 접근](#)
+    + [안전하게 nullable 프로퍼티 할당](#)
+        + [1. if-else](#)
+        + [2. 엘비스 연산자(Elvis Operation)](#)
+        + [3. Safe Cast](#)
+        + [4. Collection의 Null 객체를 모두 제거](#)
 ## Data Class
 데이터 클래스(Data class)는 데이터 보관 목적으로 만든 클래스를 의미한다. 데이터 클래스는 프로퍼티에 대한 toString(), hashCode(), equals(), copy() 메소드를 자동으로 만들어 준다. 그래서 boilerplate code를 만들지 않아도 된다.
 
@@ -469,6 +481,141 @@ public static final void main() {
 그렇기 때문에 lateinit은 immutable(불변) 프로퍼티가 아니다.
 + lateinit은 nullable 또는 primitive type의 프로퍼티를 사용할 수 없다. 반면에 lazy는 모두 가능하다.
 + lateinit은 직접적으로 프로퍼티를 갖고 있는 구조지만(자바에서 field를 갖고 있음), lazy는 Lazy라는 객체 안에 우리가 선언한 field를 갖고 있다. 그래서 lazy의 프로퍼티를 직접 변경할 수 없다.
+
+## Null safety
+코틀린은 자바와 다르게 Nullable과 Non-nullable 타입으로 프로퍼티를 선언할 수 있다. Non-nullable 타입으로 선언하면 객체가 null이 아닌 것을 보장하기 때문에 null check 등의 코드를 작성할 필요가 없다.
+> 자바의 경우 int, boolean과 같은 primitive type을 제외한 객체들은 항상 null이 될 수 있다. 
+
+### Nullable과 Non-Nullable 프로퍼티
++ 타입을 선언할 때 `?` 를 붙이면 null을 할당할 수 있는 프로퍼티이고, `?` 가 붙지 않으면 null이 허용되지 않는 프로퍼티이다.
+```kotlin
+var nullable: String? = "nullable"
+var nonNullable: String = "non-Nullable"
+```
++ nullable 프로퍼티는 null을 할당할 수 있지만, nonNullable에 null을 할당하려고 하면 컴파일 에러가 발생한다.
+```kotlin
+nullable = null      // 컴파일 성공
+nonNullable = null   // 컴파일 에러
+```
++ 장점
+    + Null Pointer Exception과 같은 예외가 발생하지 않을 수 있다.
+    + 자바처럼 try-catch 구문을 많이 쓰지 않아도 된다.
+
+### 코틀린에서 Null Pointer Exception(NPE)이 발생하는 경우
++ 코틀린에서는 NPE가 발생하지 않을 것 같지만 자바의 라이브러리를 쓰는 경우 NPE가 발생할 수 있다. 
++ 자바에서는 non-nullable 타입이 없기 때문에 자바 라이브러리를 사용할 때 nullable 타입으로 리턴된다.
+
+### nullable 타입을 non-nullable 타입으로 변경하기
++ 코틀린에서 아래와 같은 자바 라이브러리를 사용한다고 가정
++ 아래 함수는 String을 리턴하며, 코틀린에서는 이 타입을 nullable인 `String?` 으로 인식한다.
+```java
+String getString() {
+  String str = "";
+  ....
+  return str;
+}
+```
+
++ 코틀린에서 이 함수의 리턴 값을 non-nullable인 `String`으로 변환하고 싶다면?
++ 아래 코드처럼 대입하면 컴파일 에러가 발생한다.
+    + 이유? `String?` 타입을 `String` 타입에 할당하려고 했기 때문
+```kotlin
+var nonNullString1: String = getString()     // 컴파일 에러
+```
+
++ 반면 아래 코드는 컴파일 된다.
+    + 이유? `!!` 연산자를 사용했기 때문이다.
+    + `!!` 연산자는 객체가 null 이 아닌 것을 보장하고, 만약 null이라면 NPE를 발생시킨다.
+```kotlin
+var nonNullString2: String = getString()!!   // 컴파일 성공
+```
+
+### 안전하게 nullable 프로퍼티 접근하기
+#### **1. 조건문으로 nullable 접근**
+if-else를 이용하는 방법, nullable 접근 전에 if로 null을 체크한다.
+```kotlin
+val b: String? = "Kotlin"
+if (b != null && b.length > 0) {
+    print("String of length ${b.length}")
+} else {
+    print("Empty string")
+}
+```
++ 장점 : 구현이 쉽다.
++ if-else 루프가 반복되는 경우 가독성을 해칠 수 있다.(if-else 루프 지옥)
+
+#### **2. Safe call 연산자로 nullable 접근**
+Safe call은 객체를 접근할 떄 `?.`로 접근하는 방법을 말한다.
++ 예를 들어 아래 코드에서 `b?.length`를 수행할 때 `b`가 null이라면 `length`를 호출하지 않고 null을 리턴한다. 그렇기 때문에 NPE가 발생하지 않는다.
+```kotlin
+val a: String = "Kotlin"
+val b: String? = null
+println(b?.length)
+println(a?.length) // Unnecessary safe call
+```
++ 위의 코드에서 a?.length는 불필요하게 Safe call을 사용하고 있다. a는 Non-nullable이기 때문
++ 아래 여러 객체로 둘러 쌓인 String에 접근하는 코드. 
+    + 이 객체들 중 null이 있으면 null을 리턴한다.
+```kotlin
+println(a?.b?.c?.d?.length)
+```
+
+### 안전하게 nullable 프로퍼티 할당
+어떤 프로퍼티를 다른 프로퍼티에 할당할 때, 객체가 null인 경우 default 값을 할당하고 싶을 수 있다. 
++ 자바에서는 삼항연산자를 사용하여 아래 코드처럼 객체가 null인 경우 default값을 설정해줄 수 있다.
+```java
+String b = null;
+int l =  b != null ? b.length() : -1;
+```
++ 하지만 코틀린은 삼항 연산자를 지원하지 않는다.
+
+#### **1. if-else**
+자바와는 다르게 코틀린은 한줄로 if-else를 쓸 수 있다. 
++ 다음은 if-else를 사용하여 삼항연산자와 동일한 내용을 구현한 코드입니다.
+```kotlin
+val l = if (b != null) b.length else -1
+```
+#### **2. 엘비스 연산자(Elvis Operation)**
+엘비스 연산자는 ?:를 말한다. 삼항연산자와 비슷한데 ?: 왼쪽의 객체가 null이 아니면 이 객체를 리턴하고 null이라면 ?:의 오른쪽 객체를 리턴한다. 
++ 다음은 위의 if-else 예제를 엘비스 연산자를 사용하여 구현한 코드입니다.
+```kotlin
+val l = b?.length ?: -1
+```
+
+#### **3. Safe Cast**
+코틀린에서 형변환할 때 Safe Cast를 이용하면 안전하다.
++ 아래 코드에서 string은 문자열이지만 Any타입이다.
++ as?를 이용하여 String과 Int로 형변환을 시도하고 있다. 
++ String은 가능하기 때문에 성공하였고, Int는 타입이 맞지 않기 때문에 null을 리턴
+
+```kotlin
+val string: Any = "AnyString"
+val safeString: String? = string as? String
+val safeInt: Int? = string as? Int
+println(safeString)
+println(safeInt)
+```
++ 실행 결과
+    + safeInt는 캐스팅이 실패하여 null이 할당
+```
+AnyString
+null
+```
+
+#### **4. Collection의 Null 객체를 모두 제거**
+Collection에 있는 Null 객체를 미리 제거할 수 있는 함수 제공
++ 다음은 List에 있는 null 객체를 `filterNotNull` 메소드를 이용하여 삭제하는 코드
+```kotlin
+val nullableList: List<Int?> = listOf(1, 2, null, 4)
+val intList: List<Int> = nullableList.filterNotNull()
+println(intList)
+```
++ 실행결과
+    + null이 제거된 나머지 아이템들만 출력
+
+```
+[1, 2, 4]
+``` 
 
 ---
 ### 출처
