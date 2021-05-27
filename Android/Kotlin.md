@@ -33,14 +33,14 @@
 5. [Higher-order-function(고차 함수)]()
 6. [Collections](#collections)
     + [List](#list)
-        + [List : Immutable](list--immutable)
-        + [List : Mutable](list--mutable)
+        + [List : Immutable](#list--immutable)
+        + [List : Mutable](#list--mutable)
     + [Set](#set)
-        + [Set : Immutable](set--immutable)
-        + [Set : Mutable](set--mutable)
+        + [Set : Immutable](#set--immutable)
+        + [Set : Mutable](#set--mutable)
     + [Map](#map)
-        + [Map : Immutable](map--immutable)
-        + [Map : Mutable](map--mutable)
+        + [Map : Immutable](#map--immutable)
+        + [Map : Mutable](#map--mutable)
 ## Data Class
 데이터 클래스(Data class)는 데이터 보관 목적으로 만든 클래스를 의미한다. 데이터 클래스는 프로퍼티에 대한 toString(), hashCode(), equals(), copy() 메소드를 자동으로 만들어 준다. 그래서 boilerplate code를 만들지 않아도 된다.
 
