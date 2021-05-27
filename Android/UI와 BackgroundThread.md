@@ -147,6 +147,24 @@ AsyncTask는 메인스레드에서 생성 후 실행되며, 메인 스레드에�
 2. 구현한 액티비티 종료 시 별도의 지시가 없다면 종료되지 않는다.
 3. Activity 종료 후 재시작 시 AsyncTask의 Reference는 invalid 해지며 onPostExecute() 메소드는 새로운 Activity에 어떠한 영향도 미치지 않는다.
 4. AsyncTask의 기본 처리 작업 개수 1개
+
+---
+### 관련 질문
+#### **안드로이드 스튜디오의 Thread 에 대해 설명해보세요. Main Thread와 Worker Thread 등을 구분하는 이유와 Main Thread에서 반드시 동작해야하는 함수가 있는지도 설명해보세요**
+
+안드로이드 스튜디오는 크게 2가지 Thread로 분류됩니다. Main Thread(UI Thread ) 와 Worker Thread.
+
+
+Main Thread는 액티비티와 컴포넌트들의 사용을 담당하고 연동하는 역할을 합니다. UI 컴포넌트들과 밀접한 연관이 있는 Thread 이다보니 UI Thread라고도 부릅니다. 즉, System Call-Back Method , LifeCycle 에 관련된 Method 등은 반드시 Main Thead에서 관리되어야 합니다.
+
+
+그런데 다른 작업들에 의해 Main Thread가 UI와 동기화되지 못하고 지연되는 경우에는 문제가 발생합니다. 이러한 오류를 ANR(Application Not Responding, UI 관련 작업이 일정기간 이상 반응되지 못하면 발생) 이라 부릅니다.
+
+이러한 문제점을 막기위해 불안정한 UI관련 작업이나 비동기 작업(애니메이션 등) , High Cost의 연산작업 (Database 처리등) 등은 Worker Thread를 따로 만들어 처리하도록 합니다.
+
+​
+하지만 View 등의 UI 관련 컴포넌트를 업데이트 하는 작업은 UI Thread에서 진행되어야 하는데 애니메이션등의 비동기작업을 진행하며 UI를 수정해야 한다면, Async Task, Coroutine을 사용합니다.(Async Task는 이제 사용되지 않음)
+
 ---
 ### 출처
 https://itmining.tistory.com/5

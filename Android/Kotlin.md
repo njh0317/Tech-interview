@@ -624,8 +624,36 @@ println(intList)
 [1, 2, 4]
 ``` 
 
+## Higher-order-function(고차 함수)
+Higher-order-function이란 다음 2가지 중 하나 이상을 만족하는 함수를 말한다.
++ 함수를 파라미터로 전달 받는 함수
++ 함수를 리턴하는 함수
+
+**예시**
+```kotlin
+object Main {
+    @JvmStatic
+    fun main(args: Array<String>) {
+        println(simpleHigherOrderFunction({ x, y -> x + y }, 10, 20)) //30
+    }
+
+    fun simpleHigherOrderFunction(sum: (Int, Int) -> Int, a: Int, b: Int): Int = sum(a, b)
+}
+```
++ simpleHigherOrderFunction의 파라미터 : sum 이라는 함수 하나, Int 값 2개 전달 받는다.
++ sum 파라미터는 Int 값 2개를 전달 받아 Int 값을 반환하는 함수
++ 위의 예시는 함수를 파라미터로 전달받았기 때문에 **Higher-order-function** 이다.
+
+### 관련 질문
+#### **Lambda Function과 High Order Function에 대해 설명해보세요**
+Kotlin에서는 함수형 프로그래밍을 지원합니다.
+High Order Function(고차 함수)란, 함수를 인수로 취하거나 함수를 결과로 반환할 수 있는 함수입니다. Android Studio에서 자주 사용하는 Call-Back Method 등이 고차함수입니다.
+이러한 고차함수에서 매개변수로 주어지는 식을 Lambda Expression(람다 표현식)이라고 부릅니다.
+
 ---
 ### 출처
 https://blog.yena.io/studynote/2020/04/15/Kotlin-Scope-Functions.html
 
 https://codechacha.com/ko/kotlin-late-init/
+
+https://wsx2792.tistory.com/16
