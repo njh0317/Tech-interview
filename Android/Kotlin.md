@@ -290,6 +290,10 @@ numbers
     .add("four")
 ```
 
+![image](https://user-images.githubusercontent.com/33089715/119781488-0b95ae80-bf06-11eb-808a-9f10231d3cd4.png)
+출처 : https://medium.com/androiddevelopers/kotlin-standard-functions-cheat-sheet-27f032dd4326
+
+
 ## 초기화 지연 - lateinit, lazy
 + 코틀린에서는 변수 선언을 먼저하고 초기화는 뒤로 미루는 기능들을 제공한다. 
 + 장점 : 사용할지 모르는 데이터를 미리 초기화할 필요가 없어서 성능 향상에 도움이 됩니다. 
