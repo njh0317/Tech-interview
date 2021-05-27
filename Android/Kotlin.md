@@ -30,6 +30,17 @@
         + [2. 엘비스 연산자(Elvis Operation)](#2-엘비스-연산자elvis-operation)
         + [3. Safe Cast](#3-safe-cast)
         + [4. Collection의 Null 객체를 모두 제거](#4-collection의-null-객체를-모두-제거)
+5. [Higher-order-function(고차 함수)]()
+6. [Collections](#collections)
+    + [List](#list)
+        + [List : Immutable]()
+        + [List : Mutable]()
+    + [Set](#set)
+        + [Set : Immutable]()
+        + [Set : Mutable]()
+    + [Map](#map)
+        + [Map : Immutable]()
+        + [Map : Mutable]()
 ## Data Class
 데이터 클래스(Data class)는 데이터 보관 목적으로 만든 클래스를 의미한다. 데이터 클래스는 프로퍼티에 대한 toString(), hashCode(), equals(), copy() 메소드를 자동으로 만들어 준다. 그래서 boilerplate code를 만들지 않아도 된다.
 
@@ -650,6 +661,176 @@ Kotlin에서는 함수형 프로그래밍을 지원합니다.
 High Order Function(고차 함수)란, 함수를 인수로 취하거나 함수를 결과로 반환할 수 있는 함수입니다. Android Studio에서 자주 사용하는 Call-Back Method 등이 고차함수입니다.
 이러한 고차함수에서 매개변수로 주어지는 식을 Lambda Expression(람다 표현식)이라고 부릅니다.
 
+## Collections
+자바의 List, Map, Set 등을 Collection이라고 하며, 코틀린의 Collections은 기본적으로 **Mutable과 Immutable을 별개로 지원한다**.
++ Mutable로 생성하면 추가, 삭제가 가능하지만, Immutable로 생성하면 수정이 안된다.
+
+![image](https://user-images.githubusercontent.com/33089715/119791326-b1015000-bf0f-11eb-950f-dd092c933e81.png)
+출처 : kotlinlang.com
+
+### List
+List는 데이터가 저장하거나 삭제될 때 순서를 지키는 Collection으로, Mutable과 Immutable을 모두 지원한다.
+
+#### List : Immutable
++ `listOf<타입>(아이템, )`로 Immutable List를 생성 및 초기화를 할 수 있다.(타입 생략 가능)
++ Immutable이기 때문에 get만 가능하다. 
+    + List의 getter는 자바처럼 get(index)도 지원하고 배열처럼 [index]도 지원한다.
+
+```kotlin
+val fruits= listOf<String>("apple", "banana", "kiwi", "peach")
+// val fruits= listOf("apple", "banana", "kiwi", "peach") -> 타입 생략 가능
+println("fruits.size: ${fruits.size}")
+println("fruits.get(2): ${fruits.get(2)}")
+println("fruits[3]: ${fruits[3]}")
+println("fruits.indexOf(\"peach\"): ${fruits.indexOf("peach")}")
+
+//실행 결과
+//fruits.size: 4
+//fruits.get(2): kiwi
+//fruits[3]: peach
+//fruits.indexOf("peach"): 3
+
+```
+
+#### List : Mutable
++ 수정가능한 List는 `mutableListOf`로 선언
++ listOf와 대부분 비슷하지만, 추가 및 삭제가 가능하다.
++ remove, add, addAll, removeAt, replace, replaceAll, contains, forEach 등
+
+```kotlin
+val fruits= mutableListOf<String>("apple", "banana", "kiwi", "peach")
+fruits.remove("apple")
+fruits.add("grape")
+println("fruits: $fruits")
+
+fruits.addAll(listOf("melon", "cherry"))
+println("fruits: $fruits")
+fruits.removeAt(3)
+println("fruits: $fruits")
+
+// 실행 결과
+
+// fruits: [banana, kiwi, peach, grape]
+// fruits: [banana, kiwi, peach, grape, melon, cherry]
+// fruits: [banana, kiwi, peach, melon, cherry]
+```
+
+### Set
+Set은 동일한 아이템이 없는 Collection, 아이템 순서는 특별히 정해져 있지 않다.
++ null 객체 갖고 있을 수 있다.(1개만)
++ immutable과 Mutable을 별개로 지원
+
+#### Set : Immutable
++ `setOf<타입>(아이템들)`로 객체를 생성
+
+```kotlin
+val numbers = setOf<Int>(33, 22, 11, 1, 22, 3)
+println(numbers)
+println("numbers.size: ${numbers.size}")
+println("numbers.contains(1): ${numbers.contains(1)}")
+println("numbers.isEmpty(): ${numbers.isEmpty()}")
+
+// 실행 결과
+// [33, 22, 11, 1, 3]
+// numbers.size: 5
+// numbers.contains(1): true
+// numbers.isEmpty(): false
+
+```
+#### Set : Mutable
++ Mutable은 `mutableSetOf<타입>(아이템들)` 로 생성할 수 있다. 
++ Mutable이기 때문에 추가, 삭제가 가능하다. 
++ List와 비슷한 메소드들을 지원
+
+```kotlin
+val numbers = mutableSetOf<Int>(33, 22, 11, 1, 22, 3)
+println(numbers)
+numbers.add(100)
+numbers.remove(33)
+println(numbers)
+numbers.removeIf({ it < 10 }) // 10 이하의 숫자를 삭제
+println(numbers)
+
+// 실행 결과
+// [33, 22, 11, 1, 3]
+// [22, 11, 1, 3, 100]
+// [22, 11, 100]
+
+```
+
+### Map
+Map은 key와 value를 짝지어 저장하는 Collection으로, Map의 key는 유일하기 때문에 동일한 이름의 key는 허용되지 않는다. Immutable과 Mutable을 별개로 지원한다.
+
+#### Map : Immutable
++ Map은 `mapOf<key type, value type>(아이템)`로 생성할 수 있다. 
++ 아이템은 Pair객체로 표현하며, Pair에 key와 value를 넣을 수 있다.
++ Pair(A, B)는 A to B로 간단히 표현이 가능하다. 이런 문법이 가능한 것은 to가 `Infix`이기 때문이다.
+
+```kotlin
+val numbersMap = mapOf<String, String>(
+    "1" to "one", "2" to "two", "3" to "three")
+println("numbersMap: $numbersMap")
+val numbersMap2 = mapOf(Pair("1", "one"), Pair("2", "two"), Pair("3", "three"))
+println("numbersMap2: $numbersMap2")
+
+// 실행해보면 모두 동일한 값을 갖고 있습니다.
+// numbersMap: {1=one, 2=two, 3=three}
+// numbersMap2: {1=one, 2=two, 3=three}
+```
++ 데이터를 읽는 것도 다른 Collection과 유사하다. get(index), [index] 모두 지원한다.
++ `keys`와 `values`는 key와 value 만으로 구성된 Set을 리턴
+
+```kotlin
+val numbersMap = mapOf<String, String>(
+    "1" to "one", "2" to "two", "3" to "three")
+println("numbersMap.get(\"1\"): ${numbersMap.get("1")}")
+println("numbersMap[\"1\"]: ${numbersMap["1"]}")
+println("numbersMap[\"1\"]: ${numbersMap.values}")
+println("numbersMap keys:${numbersMap.keys}")
+println("numbersMap values:${numbersMap.values}")
+
+for (value in numbersMap.values) {
+    println(value)
+}
+
+// 실행결과
+// numbersMap.get("1"): one
+// numbersMap["1"]: one
+// numbersMap["1"]: [one, two, three]
+// numbersMap keys:[1, 2, 3]
+// numbersMap values:[one, two, three]
+// one
+// two
+// three
+```
+
+#### Map : Mutable
++ Mutable은 mutableMapOf<key type, value type>(아이템)로 생성
++ 객체 추가는 put 메소드이며, Pair를 사용하지 말고 인자로 key와 value를 넣어주면 된다.
++ put도 배열 방식을 지원
++ 그 외에 자바의 Map과 유사
+
+```kotlin
+val numbersMap = mutableMapOf<String, String>(
+        "1" to "one", "2" to "two", "3" to "three")
+println("numbersMap: $numbersMap")
+
+numbersMap.put("4", "four")
+numbersMap["5"] = "five"
+println("numbersMap: $numbersMap")
+
+numbersMap.remove("1")
+println("numbersMap: $numbersMap")
+
+numbersMap.clear()
+println("numbersMap: $numbersMap")
+
+// 실행결과
+// numbersMap: {1=one, 2=two, 3=three}
+// numbersMap: {1=one, 2=two, 3=three, 4=four, 5=five}
+// numbersMap: {2=two, 3=three, 4=four, 5=five}
+// numbersMap: {}
+```
 ---
 ### 출처
 https://blog.yena.io/studynote/2020/04/15/Kotlin-Scope-Functions.html
