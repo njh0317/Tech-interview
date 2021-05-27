@@ -83,7 +83,7 @@ public final class Site {
 ### 특징
 + 데이터 클래스의 생성자(primary constructor)는 1개 이상의 프로퍼티를 선언되어야 합니다.
 + 데이터 클래스의 생성자 프로퍼티는 val 또는 var으로 선언해야 합니다.
-+ 데이터 클래스에 abstract, open, sealed, inner 를 붙일 수 없습니다.
++ 데이터 클래스에 abstract(추상), open(상속), sealed(인터페이스), inner(내부 클래스) 를 붙일 수 없습니다.
 + 클래스에서 toString(), hashCode(), equals(), copy()를 override하면, 그 함수는 직접 구현된 코드를 사용합니다.
 + 데이터 클래스는 상속받을 수 없습니다.
 
@@ -484,6 +484,9 @@ public static final void main() {
 
 ## Null safety
 코틀린은 자바와 다르게 Nullable과 Non-nullable 타입으로 프로퍼티를 선언할 수 있다. Non-nullable 타입으로 선언하면 객체가 null이 아닌 것을 보장하기 때문에 null check 등의 코드를 작성할 필요가 없다.
+
+**?. 연산자 : Null Safe Operator**
+
 > 자바의 경우 int, boolean과 같은 primitive type을 제외한 객체들은 항상 null이 될 수 있다. 
 
 ### Nullable과 Non-Nullable 프로퍼티
