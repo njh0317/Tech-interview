@@ -31,7 +31,11 @@
         + [3. Safe Cast](#3-safe-cast)
         + [4. Collection의 Null 객체를 모두 제거](#4-collection의-null-객체를-모두-제거)
 5. [Higher-order-function(고차 함수)]()
-6. [Collections](#collections)
+6. [inline functions](#inline-functions)
+    + [고차함수의 Runtime penalties](#고차함수의-runtime-penalties)
+    + [inline function 구현 및 동작 원리](#inline-function-구현-및-동작-원리)
+    + [noinline keyword](#noinline-keyword)
+7. [Collections](#collections)
     + [List](#list)
         + [List : Immutable](#list--immutable)
         + [List : Mutable](#list--mutable)
@@ -661,6 +665,138 @@ Kotlin에서는 함수형 프로그래밍을 지원합니다.
 High Order Function(고차 함수)란, 함수를 인수로 취하거나 함수를 결과로 반환할 수 있는 함수입니다. Android Studio에서 자주 사용하는 Call-Back Method 등이 고차함수입니다.
 이러한 고차함수에서 매개변수로 주어지는 식을 Lambda Expression(람다 표현식)이라고 부릅니다.
 
+## inline functions
+코틀린에서 고차함수를 사용하면 추가적인 메모리 할당 및 함수 호출로 Runtime overhead가 발생한다. inline functions는 내부적으로 함수 내용을 호출되는 위치에 복사하며, Runtime overhead를 줄여준다.
+
+### 고차함수의 Runtime penalties
++ kotlin은 다음과 같이 함수를 인자로 전달하는 Lambda expression을 정의할 수 있다.
+```kotlin
+fun someMethod(a: Int, func: () -> Unit):Int {
+    func()
+    return 2*a
+}
+
+fun main(args: Array<String>) {
+    var result = someMethod(2, {println("Just some dummy function")})
+    println(result)
+}
+```
++ 위의 코드를 다음과 같이 자바로 변환해보면, `someMethod`메소드 호출을 위해 객체를 생성한다.
+```java
+public final class InlineFunctions {
+   public static final InlineFunctions INSTANCE;
+
+   public final int someMethod(int a, @NotNull Function0 func) {
+      func.invoke();
+      return 2 * a;
+   }
+
+   @JvmStatic
+   public static final void main(@NotNull String[] args) {
+      int result = INSTANCE.someMethod(2, (Function0)null.INSTANCE);
+      System.out.println(result);
+   }
+
+   static {
+      InlineFunctions var0 = new InlineFunctions();
+      INSTANCE = var0;
+   }
+}
+```
++ 내부적으로 객체 생성과 함수 호출을 하도록 구현이 되어있으며, 이런 부분이 성능을 떨어뜨릴 수 있다.
+
+### inline function 구현 및 동작 원리
++ 다음처럼 함수 앞에 inline 키워드를 붙이면 inline function이 된다.
+```kotlin
+inline fun someMethod(a: Int, func: () -> Unit):Int {
+    func()
+    return 2*a
+}
+```
++ 위의 코드가 컴파일될 때, 컴파일러는 함수 내부의 코드를 호출하는 위치에 복사한다.
++ 컴파일 되는 바이트코드의 양은 많아지지만, 함수 호출을 하거나 추가적인 객체 생성하는 부분은 없다.
++ 위의 코드를 자바로 컴파일 해보면, 다음과 같이 코드가 복사된 것을 알 수 있다.
+```java
+public final class InlineFunctions {
+
+   @JvmStatic
+   public static final void main(@NotNull String[] args) {
+      int a = 2;
+      int var5 = false;
+      String var6 = "Just some dummy function";
+      System.out.println(var6);
+      int result = 2 * a;
+      System.out.println(result);
+   }
+
+}
+```
+
++ 일반 함수보다 성능이 좋다.
++ 하지만 inline function은 내부적으로 코드를 복사하기 때문에, 인자로 전달받은 함수는 다른 함수로 전달되거나 참조될 수 없다.
+```kotlin
+inline fun newMethod(a: Int, func: () -> Unit, func2: () -> Unit) {
+    func()
+    someMethod(10, func2)
+}
+
+fun someMethod(a: Int, func: () -> Unit):Int {
+    func()
+    return 2*a
+}
+
+fun main(args: Array<String>) {
+    newMethod(2, {println("Just some dummy function")},
+            {println("can't pass function in inline functions")})
+}
+```
++ 위의 코드에서 `newMothod()`는 inline으로 선언되었으며, `someMethod()`를 호출하며 함수를 인자로 전달한다.
++ 이 코드를 컴파일해보면 `someMethod(10, func2)` 때문에 컴파일이 실패한다. inline 함수에서 인자로 전달받은 함수는 참조할 수 없기 때문에 전달하는 것이 불가능 하다.
+
+```
+Error:(9, 24) Kotlin: Illegal usage of inline-parameter 'func2' in 'public final inline fun newMethod(a: Int, func: () -> Unit, func2: () -> Unit): Unit defined in example.InlineFunctions'. Add 'noinline' modifier to the parameter declaration
+```
+
+### noinline keyword
++ 위의 예제처럼 모든 인자를 inline으로 처리하고 싶지 않은 경우 인자 앞에 noinline 키워드를 사용하면 그 인자는 inline에서 제외된다. 즉, 인자를 다른 함수의 인자로 전달할 수 있다.
++ 아래 코드는 위의 코드에서 `newMethod()`의 인자 `func2` 앞에 noinline 키워드를 붙였다.
+    + 이 키워드가 붙은 함수만 제외하고 모두 inline으로 처리된다.
+```kotlin
+inline fun newMethod(a: Int, func: () -> Unit, noinline func2: () -> Unit) {
+    func()
+    someMethod(10, func2)
+}
+
+fun someMethod(a: Int, func: () -> Unit):Int {
+    func()
+    return 2*a
+}
+
+@JvmStatic
+fun main(args: Array<String>) {
+    newMethod(2, {println("Just some dummy function")},
+            {println("can't pass function in inline functions")})
+}
+```
++ 위의 코드를 자바로 변환한 것, `func2()`를 제외한 나머지 코드들은 모두 inline으로 처리되었다.
+```java
+public final void newMethod(int a, @NotNull Function0 func, @NotNull Function0 func2) {
+   func.invoke();
+   this.someMethod(10, func2);
+}
+
+public final int someMethod(int a, @NotNull Function0 func) {
+   func.invoke();
+   return 2 * a;
+}
+
+@JvmStatic
+public static final void main(@NotNull String[] args) {
+   String var6 = "Just some dummy function";
+   System.out.println(var6);
+   this_$iv.someMethod(10, func2$iv);
+}
+```
 ## Collections
 자바의 List, Map, Set 등을 Collection이라고 하며, 코틀린의 Collections은 기본적으로 **Mutable과 Immutable을 별개로 지원한다**.
 + Mutable로 생성하면 추가, 삭제가 가능하지만, Immutable로 생성하면 수정이 안된다.
@@ -838,3 +974,5 @@ https://blog.yena.io/studynote/2020/04/15/Kotlin-Scope-Functions.html
 https://codechacha.com/ko/kotlin-late-init/
 
 https://wsx2792.tistory.com/16
+
+https://codechacha.com/ko/kotlin-inline-functions/
