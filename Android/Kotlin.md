@@ -33,6 +33,8 @@
 ## Data Class
 데이터 클래스(Data class)는 데이터 보관 목적으로 만든 클래스를 의미한다. 데이터 클래스는 프로퍼티에 대한 toString(), hashCode(), equals(), copy() 메소드를 자동으로 만들어 준다. 그래서 boilerplate code를 만들지 않아도 된다.
 
+<span style="color:red">**컴파일 때 생성!!**</span>
+
 데이터 클래스는 클래스 앞에 data를 붙여줍니다. 예를 들어, 다음과 같이 데이터 클래스를 정의할 수 있습니다.
 
 ```kotlin
