@@ -504,7 +504,7 @@ public static final void main() {
 ## Null safety
 코틀린은 자바와 다르게 Nullable과 Non-nullable 타입으로 프로퍼티를 선언할 수 있다. Non-nullable 타입으로 선언하면 객체가 null이 아닌 것을 보장하기 때문에 null check 등의 코드를 작성할 필요가 없다.
 
-**?. 연산자 : Null Safe Operator**
+**`?.` 연산자 : Null Safe Operator**
 
 > 자바의 경우 int, boolean과 같은 primitive type을 제외한 객체들은 항상 null이 될 수 있다. 
 
@@ -593,12 +593,12 @@ int l =  b != null ? b.length() : -1;
 
 #### **1. if-else**
 자바와는 다르게 코틀린은 한줄로 if-else를 쓸 수 있다. 
-+ 다음은 if-else를 사용하여 삼항연산자와 동일한 내용을 구현한 코드입니다.
++ 다음은 if-else를 사용하여 삼항연산자와 동일한 내용을 구현한 코드
 ```kotlin
 val l = if (b != null) b.length else -1
 ```
 #### **2. 엘비스 연산자(Elvis Operation)**
-엘비스 연산자는 ?:를 말한다. 삼항연산자와 비슷한데 ?: 왼쪽의 객체가 null이 아니면 이 객체를 리턴하고 null이라면 ?:의 오른쪽 객체를 리턴한다. 
+엘비스 연산자는 `?:`를 말한다. 삼항연산자와 비슷한데 `?:` 왼쪽의 객체가 `null`이 아니면 이 객체를 리턴하고 null이라면 `?:`의 오른쪽 객체를 리턴한다. 
 + 다음은 위의 if-else 예제를 엘비스 연산자를 사용하여 구현한 코드입니다.
 ```kotlin
 val l = b?.length ?: -1
