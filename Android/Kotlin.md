@@ -504,6 +504,7 @@ public static final void main() {
 그렇기 때문에 lateinit은 immutable(불변) 프로퍼티가 아니다.
 + lateinit은 nullable 또는 primitive type의 프로퍼티를 사용할 수 없다. 반면에 lazy는 모두 가능하다.
 + lateinit은 직접적으로 프로퍼티를 갖고 있는 구조지만(자바에서 field를 갖고 있음), lazy는 Lazy라는 객체 안에 우리가 선언한 field를 갖고 있다. 그래서 lazy의 프로퍼티를 직접 변경할 수 없다.
++ lateinit은 필요할 경우 언제든 초기화가 가능한 Properties이지만 lazy properties는 생성 후 값을 변경할 수 없는 val로 되어있다. by lazy 정의에 의해서 초기화를 진행하고 val이므로 값을 교체하는 것은 불가능하다. lazy를 사용하는 경우 기본 synchronized로 동작한다.
 
 ## Null safety
 코틀린은 자바와 다르게 Nullable과 Non-nullable 타입으로 프로퍼티를 선언할 수 있다. Non-nullable 타입으로 선언하면 객체가 null이 아닌 것을 보장하기 때문에 null check 등의 코드를 작성할 필요가 없다.
