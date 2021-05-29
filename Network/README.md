@@ -40,7 +40,7 @@
    * [SOCKET이란?](#socket이란)
    * [종류](#종류)
    * [HTTP 통신과 SOCKET 통신의 비교](#http-통신과-socket-통신의-비교)
-
+11. [기타 질문](#기타-질문)
 
 
 ## OSI 7계층
@@ -961,3 +961,14 @@ Server와 Client가 특정 Port를 통해 실시간으로 양방향 통신하는
   * Server와 Client가 실시간으로 데이터를 주고받는 상황이 필요한 경우에 사용된다.
   * 실시간 동영상 Streaming이나 온라인 게임 등과 같은 경우에 자주 사용된다.
 
+
+## 기타 질문
+### Http Request Status Code에 대해 아는대로 설명해보세요
+
+크게 앞자리 숫자를 기준으로 5가지 그룹으로 나누어 집니다.
+
++ 1XX : 정보(조건부) 응답
++ 2XX : 성공
++ 3XX : Ridirection Message Client는 요청을 마무리하기 위해 추가 동작을 해야합니다.
++ 4XX : Client 요청 오류, Client가 전송한 코드에 오류가 있음
++ 5XX : 서버 오류
