@@ -50,7 +50,8 @@ Data의 변경을 관찰할 수 있는 Data Holder 클래스
 
     onChanged() 메서드 정의해야함
 
-### MutableLiveData와 LiveData를 구분하는 이유
+### 기타 질문
+#### MutableLiveData와 LiveData를 구분하는 이유
 - MutableLiveData : 값을 get/set 모두를 할 수 있다.
     - 값의 get/set 모두를 허용하기 때문에 값의 변경과 읽기 모두 가능하다.
     - postValue(in Worker Thread), setValue(in Main Thread) 메서드를 이용해 값을 변경할 수 있다.
@@ -60,7 +61,19 @@ Data의 변경을 관찰할 수 있는 Data Holder 클래스
 - ViewModel과 View의 역할을 분리하기 위해 사용한다.
 - ViewModel은 언제나 새로운 값의 변경이 일어나고, 다시 읽을 수 있는 형태로 사용하는 것이도, View는 값의 입력이 아닌 읽기만을 허용한다.
 
+#### LiveData는 인터럽트 방식인가 폴링 방식인가?
++ 폴링 방식은 정해진 시간 또는 순번에 상태를 확인해서 상태 변화가 있는지 없는지 체크를 하는 방식이다.
++ 인터럽트 방식은 main문을 실행하는 도중 외부에서 정해져있는 인터럽트 핀에 신호가 들어오면 MCU는 즉각적으로 하고 있는 동작을 멈추고 인터럽트 서비스 루틴을 실행하는 것이다.
++ LiveData는 데이터가 변경된 시점에 Observer가 실행되기 때문에 인터럽트 방식이라고 볼 수 있다.
+​
+#### 옵저버 패턴 설명
++ 한 객체의 상태가 바뀌면 그 객체에 의존하는 다른 객체들한테 연락이 가고 자동으로 내용이 갱신되는 방식으로 일대다(one-to-many) 의존성을 정의한다.
++ 데이터 전달 방식은 2가지가 있다. 주체 객체에서 옵저버로 데이터를 보내는 방식(푸시 방식), 옵저버에서 주체 객체의 데이터를 가져가는 방식(풀 방식)
++ Subject 와 Observer가 존재하고 Subject 에 Observer를 등록하고 난 뒤 subject의 데이터가 변경되면 등록된 Observer가 호출 되는 방식
+
 ---
 ### 출처
 https://velog.io/@jojo_devstory/Android-Databinding%EC%9D%84-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90
 https://velog.io/@jojo_devstory/Android-LiveData...%EB%84%8C-%EB%88%84%EA%B5%AC%EB%83%90
+https://kimyounghoons.github.io/android/interview/android-interview/
+
