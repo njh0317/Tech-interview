@@ -150,3 +150,7 @@ public View getView(final int position, View convertView, ViewGroup parent) {
 
 + ListView : 각 아이템을 생성할 때 마다 뷰 바인딩을 계속해서 해주어 성능저하가 일어난다.
 + RecyclerView : ViewHolder 패턴을 강제로 구현하게 해서 뷰 바인딩을 한 번만 해주고, 이 후 아이템을 생성할 때 바인딩 된 뷰 객체를 재활용한다.Item에 대한 뷰의 변형, 애니메이션할 수 있다.
+
+## 기타
+#### 어댑터 패턴?
++ 한 클래스의 인터페이스를 클라이언트에서 사용하고자 하는 다른 인터페이스로 변환한다. 어댑터를 이용하면 인터페이스 호환성 문제 때문에 같이 쓸 수 없는 클래스들을 연결해서 쓸 수 있다.
