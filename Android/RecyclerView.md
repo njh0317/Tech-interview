@@ -154,3 +154,11 @@ public View getView(final int position, View convertView, ViewGroup parent) {
 ## 기타
 #### 어댑터 패턴?
 + 한 클래스의 인터페이스를 클라이언트에서 사용하고자 하는 다른 인터페이스로 변환한다. 어댑터를 이용하면 인터페이스 호환성 문제 때문에 같이 쓸 수 없는 클래스들을 연결해서 쓸 수 있다.
+
+#### 뷰 홀더 패턴이란?
++ 원래 ListView를 사용할 때는 getView()를 오버라이드해서 뷰를 인플레이팅 시키는데 이 부분에서 계속해서 생성하고 findviewById를 불러주게 되면 부담이 많이 가는 작업이 된다. 데이터가 많아질 수록 느려진다. 따라서 viewHolder 패턴을 적용한다. 해당 뷰가 널일 때만 view를 인플레이트 시키고 viewHolder 클래스에 findViewById를 사용해서 viewHolder는 해당 뷰에 태깅 처리되어 다음 번 부터는 태그한 viewHolder를 가져와서 사용한다. 그 이후에 viewHolder를 강제로 구현하게 나온 것이 RecyclerView이다.
+
+---
+### 출처
+
+https://kimyounghoons.github.io/android/interview/android-interview/
