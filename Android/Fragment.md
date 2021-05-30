@@ -162,7 +162,7 @@ ViewModel을 이용하면 Activity를 라이프사이클 오너로 등록하여 
     }
     ```
 
-### FragmentManager에 Bundle로 Data를 담아 전달
+### 3. FragmentManager에 Bundle로 Data를 담아 전달
 + 전송하려는 Fragment
     ```kotlin
     //PassBundleFragment는 본인이 전달하고자 하는 Fragment class
