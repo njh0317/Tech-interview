@@ -65,7 +65,8 @@
     * [JDBC란?](#jdbc란)
     * [JDBC를 이용한 DB 접근](#jdbc를-이용한-db-접근)
 12. [SQL vs NoSQL](#sql-vs-nosql)
-   * []()
+   * [SQL(관계형 데이터베이스)](#sql관계형-데이터베이스)
+   * [NoSQL(Non-Relational, 비관계형 데이터베이스)](#nosqlnon-relational-비관계형-데이터베이스)
 ## 데이터베이스 풀
 
 ### Connection Pool
