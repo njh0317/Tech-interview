@@ -91,7 +91,7 @@ Heap은 세 부분으로 나뉘는데, Permanent 영역, New/Young영역, Old영
 2. New/Young 영역은 Eden과 Survivor 0/1공간이 있는데, Eden은 객체들이 최초로 생성되는 공간이며, Survivor0/1 은 Eden에서 참조되는 객체들이 저장되는 공간입니다.
 3. Old영역은 New Area에서 일정 시간 참조되고 있는, 살아남은 객체들이 저장되는 공간입니다.
 
-(:heavy_plus_sign: 인스턴스는 소멸 방법과 소멸 시점이 자역변수와 다르기 때문에 Heap이라는 별도의 영역에 할당됩니다. )
+(:heavy_plus_sign: 인스턴스는 소멸 방법과 소멸 시점이 지역변수와 다르기 때문에 Heap이라는 별도의 영역에 할당됩니다. )
 
 **:heavy_plus_sign: Java의 Heap 영역**
 
