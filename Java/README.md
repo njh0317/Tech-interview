@@ -132,7 +132,7 @@ Heap영역의 Young영역에서 일어나는 Minor GC와 Old영역에서 일어�
 
 ### Garbage Collection의 동작 방식은?
 
-기본적으로 'Stop the World', 'Mark ans Sweep' 2가지의 공통적인 단계를 따릅니다.
+기본적으로 'Stop the World', 'Mark and Sweep' 2가지의 공통적인 단계를 따릅니다.
 
 먼저, **Stop The World**는 GC를 실행하기 위해 JVM이 애플리케이션의 실행을 멈추는 작업입니다. GC가 실행될 때는 GC를 실행하는 thread를 제외한 모든 thread들의 작업이 중단되고, GC가 완료되면 작업이 재개됩니다. 
 
