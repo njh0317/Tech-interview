@@ -350,19 +350,25 @@
 + 스택으로 큐를 구현하기 위해서는 스택 2개가 필요하다.
 
 + push 할 때는 in_stack에 차례로 값을 push 한다. 
+
   <img src="https://user-images.githubusercontent.com/33089715/120882514-61a7d780-c613-11eb-9902-bc9da4547674.png" width = "300">
 + pop 할 때는 out_stack가 비어있으면 in_stack에 있는 값들을 차례대로 pop 하고, out_stack에 push 해준다. 
+
   <img src="https://user-images.githubusercontent.com/33089715/120882521-6b313f80-c613-11eb-87ce-fd2adadcbba0.png" width = "300">
   + push 가 끝난 후 pop 하면 제일 먼저 들어간 값이 나오게 된다.
+
   <img src="https://user-images.githubusercontent.com/33089715/120882531-74baa780-c613-11eb-9a54-f8ab9b7b9c8d.png" width = "300">
   
 ### 큐로 스택 구현
 + 스택에 push 하는 경우에 큐에 값을 넣는다.
+
    <img src="https://user-images.githubusercontent.com/33089715/120882793-e6472580-c614-11eb-9962-0cdc44a35d4d.png" width = "300">
   
 + 처음 넣은 값을 제외하고 나머지 값들을 모두 큐에서 pop해서 다시 push 한다.
-<img src="https://user-images.githubusercontent.com/33089715/120882804-ef37f700-c614-11eb-9b16-8c4ba3a2befe.png" width = "300">
+
+  <img src="https://user-images.githubusercontent.com/33089715/120882804-ef37f700-c614-11eb-9b16-8c4ba3a2befe.png" width = "300">
 + 완료 되면 큐의 마지막에 넣은 값이 제일 앞에 있게 된다. top()이나 pop() 메소드를 호출할 때 큐의 첫 번째 값을 참조하면 된다.
+
   <img src="https://user-images.githubusercontent.com/33089715/120882808-f4954180-c614-11eb-8f41-5c1bf86a25ec.png" width = "300">
 
 </br>
