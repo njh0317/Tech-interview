@@ -355,9 +355,10 @@
 + pop 할 때는 out_stack가 비어있으면 in_stack에 있는 값들을 차례대로 pop 하고, out_stack에 push 해준다. 
 
   <img src="https://user-images.githubusercontent.com/33089715/120882521-6b313f80-c613-11eb-87ce-fd2adadcbba0.png" width = "300">
+
   + push 가 끝난 후 pop 하면 제일 먼저 들어간 값이 나오게 된다.
 
-  <img src="https://user-images.githubusercontent.com/33089715/120882531-74baa780-c613-11eb-9a54-f8ab9b7b9c8d.png" width = "300">
+    <img src="https://user-images.githubusercontent.com/33089715/120882531-74baa780-c613-11eb-9a54-f8ab9b7b9c8d.png" width = "300">
   
 ### 큐로 스택 구현
 + 스택에 push 하는 경우에 큐에 값을 넣는다.
