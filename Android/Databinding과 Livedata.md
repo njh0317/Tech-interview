@@ -44,7 +44,7 @@ Data의 변경을 관찰할 수 있는 Data Holder 클래스
     LiveData에 저장된 데이터에 변화가 있으면 결합된 LifecycleOwner에 의해 상태가 active(활성)인 한 모든 데이터에 대해 Trigger 발생
 
     - **LiveData에 Observer를 결합하는 코드는 컴포넌트의 onCreate() 메소드 내에 위치하는 것이 바람직하다**.(아래 이유 2가지)
-        - onResume()에 할 경우 **pause()**나 **stop()**에 의해 잠시 백그라운드상에서 inactive된 앱이 다시 active(활성화)가 되면서 LiveData에 대한 코드가 **중복호출**이 될 수 있기 때문, 이는 LiveData의 장점 중 {생명주기에 대한 추가적인 handling을 하지 않아도 됨}에 대해 반대되는 방식
+        - onResume()에 할 경우 **pause()** 나 **stop()** 에 의해 잠시 백그라운드상에서 inactive된 앱이 다시 active(활성화)가 되면서 LiveData에 대한 코드가 **중복호출**이 될 수 있기 때문, 이는 LiveData의 장점 중 {생명주기에 대한 추가적인 handling을 하지 않아도 됨}에 대해 반대되는 방식
         - 액티비티나 프래그먼트가 active(활성화)되자마자 UI에 표시 할 수 있는 데이터를 가질 수 있기 때문에 해당 컴포넌트는 **STARTED** 상태가 되자 마자 LiveData 객체로부터 **가장 최신의 값을 수신**해야한다.
 - Observer 객체 생성
 
