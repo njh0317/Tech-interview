@@ -15,7 +15,7 @@ Databinding(데이터바인딩)은 xml 파일에 Data를 연결(binding)해서 �
 
 ## LiveData
 Data의 변경을 관찰할 수 있는 Data Holder 클래스
-+ 일반적인 Observable과 다르게 **LiveData는 안드로이드 생명주기(LifeCycle)**을 알고 있다.(Lifecycle-Aware)
++ 일반적인 Observable과 다르게 **LiveData는 안드로이드 생명주기(LifeCycle)** 을 알고 있다.(Lifecycle-Aware)
     + LiveData는 활성상태(active)일 때만 update
     + 활성상태 - STARTED, RESUME
 - LiveData객체는 Observer 객체와 함께 사용
