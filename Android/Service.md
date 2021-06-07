@@ -33,6 +33,8 @@
 ### onStartCommand()
 시스템이 `startService` 함수를 이용해 서비스를 시작 할 때 호출. 서비스를 시작하면 서비스를 중단하는 것은 우리의 몫. 서비스 내에서 직접 `stopSelf`를 호출하거나 밖에서 `stopService`를 호출해주면 된다. 새롭게 `startCommand` 호출이 일어날 때 여러번 호출 가능
 
+Service는 기본적으로 프로세스에 의해 종료가 되더라도 다시 살아나는 구조를 가지고 있다.(Service의 종료 메소드인 stopService() 메소드를 호출하기 전까지) 프로세스에 의해 종료된 Service는 onCreate() -> onStartCommand() 메소드 순으로 호출된다.
+
 **반환값** : 서비스가 시스템에 의해 소멸되었을 때, 어떤 것을 반환하냐에 따라 재시작될 때 onStartCommand()가 호출되는 방식이 달라진다.
 + START_NOT_STICKY : 서비스를 명시적으로 다시 시작할 때 까지 만들지 않는다. 시스템에 의해 강제 종료되어도 괜찮은 작업을 진행할 때 사용.
 + START_STICKY : 서비스를 다시 만들지만 마지막 Intent를 onStartCommand의 인자로 다시 전달하지 않는다. 즉, intent값을 null로 초기화 시켜서 재시작 한다.
