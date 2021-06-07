@@ -30,7 +30,7 @@
         + [2. 엘비스 연산자(Elvis Operation)](#2-엘비스-연산자elvis-operation)
         + [3. Safe Cast](#3-safe-cast)
         + [4. Collection의 Null 객체를 모두 제거](#4-collection의-null-객체를-모두-제거)
-5. [Higher-order-function(고차 함수)]()
+5. [Higher-order-function(고차 함수)](#higher-order-function고차-함수)
 6. [inline functions](#inline-functions)
     + [고차함수의 Runtime penalties](#고차함수의-runtime-penalties)
     + [inline function 구현 및 동작 원리](#inline-function-구현-및-동작-원리)
