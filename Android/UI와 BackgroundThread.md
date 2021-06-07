@@ -113,6 +113,9 @@ public boolean post(Runnable action){
     + getRunQueue는 View에만 존재하는 pending된 Runnable 들의 HandlerActionQueue이다.
 
 ## AsyncTask 클래스
+
+> 현재 AsyncTask는 deprecated되었고, coroutine 혹은 rxjava를 사용하기를 권장한다.
+
 AsyncTask는 메인스레드에서 생성 후 실행되며, 메인 스레드에서 처리시간이 오래 걸리는 작업을 백그라운드 스레드로 넘기고 계속 메인 스레드 작업을 진행하기 위해 사용된다. AsyncTask는 비동기 태스크로써 백그라운드 스레드라는 별도의 스레드에서 작업을 수행하기 때문에  AsyncTask를 실행시켜 놓고 메인 스레드는 다음 작업을 바로 할 수 있다.
 
 ### 동작 과정
