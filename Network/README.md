@@ -452,7 +452,9 @@ HTTP는 암호화가 추가되지 않았기 때문에 보안에 취약한 반면
 HTTP는 웹 상에서 Client(IE, Chrome, Firefox)와 Server(httpd, nginx, etc...)간 통신을 위한 Protocol이다.
 
 HTTP 1.1 프로토콜은 클라이언트와 서버간 통신을 위해 다음과 같은 과정을 거치게 된다.
+
 <img src="https://user-images.githubusercontent.com/33089715/121461032-0302a500-c9e9-11eb-8649-ef977075487d.png" width = "300">
+
 + 기본적으로 Connection당 하나의 요청을 처리 하도록 설계되어있다.
 + 따라서 동시 전송이 불가능하고 요청과 응답이 순차적으로 이루어지게 된다.
 + HTTP1.1의 단점은 다음과 같다.
