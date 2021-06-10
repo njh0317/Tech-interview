@@ -10,4 +10,4 @@
 7. [메모리](https://github.com/njh0317/Tech-interview/blob/main/OS/%EB%A9%94%EB%AA%A8%EB%A6%AC.md)
 8. [가상 메모리](https://github.com/njh0317/Tech-interview/blob/main/OS/%EA%B0%80%EC%83%81%20%EB%A9%94%EB%AA%A8%EB%A6%AC.md)
 9. [프레임 할당](https://github.com/njh0317/Tech-interview/blob/main/OS/%ED%94%84%EB%A0%88%EC%9E%84%20%ED%95%A0%EB%8B%B9.md)
-
+10. [캐시](https://github.com/njh0317/Tech-interview/blob/main/OS/%EC%BA%90%EC%8B%9C.md)
