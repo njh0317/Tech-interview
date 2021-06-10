@@ -501,7 +501,8 @@ SPDY(스피디/speedy로 발음)라는 구글의 비표준 개방형 네트워�
 + HTTP/2에서는 여러 파일을 한번에 병렬 전송하여, 이러한 문제를 해결했다.
 + TCP 연결 하나로 여러 요청과 응답들을 병렬적으로 보낼 수 있다. 덕분에 웹사이트 로딩이 빨라진다.
 + 아래 이미지 처럼, 하나의 커넥션에서 여러 병렬 스트림(3개)이 존재 할 수 있다. stream이 뒤섞여서 전송될 경우, stream number를 이용해 수신측에서 재조합된다.
-   <img src="https://user-images.githubusercontent.com/33089715/121462373-77d6de80-c9eb-11eb-8342-ac5f6f0fa1ba.png" width = "300">
+
+   <img src="https://user-images.githubusercontent.com/33089715/121462373-77d6de80-c9eb-11eb-8342-ac5f6f0fa1ba.png" width = "500">
 
 #### Stream 우선순위
 + HTTP 메시지가 많은 개별 프레임으로 분할될 수 있고 여러 프레임을 다중화(Multiplexing)할 수 있게 되면서, 스트림의 우선순위를 지정할 필요가 생겼다.
