@@ -488,6 +488,7 @@ SPDY(스피디/speedy로 발음)라는 구글의 비표준 개방형 네트워�
 + 이전 Header의 내용과 중복되는 필드를 재전송 하지 않도록 하여 데이터를 절약한다.
 + 또한 기존에 HTTP Header가 Plain Text(평문)이었지만, HTTP/2에서는 Huffman Coding을 사용하는 HPACK이라는 Header 압축방식을 이용하여 데이터 전송 효율을 높였다.
 <img src="https://user-images.githubusercontent.com/33089715/121462120-0dbe3980-c9eb-11eb-948a-4b5cf86293ef.png" width = "300">
+
 > Huffman Coding 방식 : 데이터 문자의 빈도에 따라서 다른 길이의 부호를 사용하는 알고리즘
 
 
