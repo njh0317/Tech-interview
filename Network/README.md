@@ -20,7 +20,7 @@
    * [HTTP란?](#http란)
    * [HTTPS란?](#https란)
    * [HTTP와 HTTPS](#http와-https)
-   * [HTTP/1.1과 HTTP/2.0](#)
+   * [HTTP/1.1과 HTTP/2.0](#http11과-http20)
 6. [GET과 POST](#get과-post)
    * [GET 방식](#get-방식)
    * [POST 방식](#post-방식)
