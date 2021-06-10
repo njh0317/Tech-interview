@@ -449,6 +449,9 @@ HTTP는 암호화가 추가되지 않았기 때문에 보안에 취약한 반면
 
 ## HTTP/1.1과 HTTP/2.0
 ### HTTP/1.1 동작방식
+
+> https://www.popit.kr/%EB%82%98%EB%A7%8C-%EB%AA%A8%EB%A5%B4%EA%B3%A0-%EC%9E%88%EB%8D%98-http2/
+
 HTTP는 웹 상에서 Client(IE, Chrome, Firefox)와 Server(httpd, nginx, etc...)간 통신을 위한 Protocol이다.
 
 HTTP 1.1 프로토콜은 클라이언트와 서버간 통신을 위해 다음과 같은 과정을 거치게 된다.
@@ -481,6 +484,9 @@ HTTP 1.1 프로토콜은 클라이언트와 서버간 통신을 위해 다음과
 + 사용자가 방문한 웹페이지는 다수의 http 요청이 발생하게 되는데 이 경우에 매 요청시 마다 중복된 헤더값을 전송하게 되며 해당 domain에 설정된 cookie 정보도 매 요청시 마다 헤더에 포함되어 전송된다.
 
 ### HTTP/2.0
+
+> https://velog.io/@taesunny/HTTP2HTTP-2.0-%EC%A0%95%EB%A6%AC
+
 SPDY(스피디/speedy로 발음)라는 구글의 비표준 개방형 네트워크 프로토콜에 기반한다. 기존의 HTTP methods, status codes, semantics 개념들이 동일하게 호환된다.
 + 퍼포먼스 향상이라는 목적을 가지며, 다음과 같은 특징들이 있다.
 
