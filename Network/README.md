@@ -20,6 +20,7 @@
    * [HTTP란?](#http란)
    * [HTTPS란?](#https란)
    * [HTTP와 HTTPS](#http와-https)
+   * [HTTP/1.1과 HTTP/2.0](#)
 6. [GET과 POST](#get과-post)
    * [GET 방식](#get-방식)
    * [POST 방식](#post-방식)
@@ -445,6 +446,64 @@ HTTP는 암호화가 추가되지 않았기 때문에 보안에 취약한 반면
 하지만 HTTPS를 이용하면 암호화/복호화의 과정이 필요하기 때문에 HTTP보다 속도가 느리다. (오늘날에는 거의 차이를 못느낄 정도) 또한, HTTPS는 인증서를 발급하고 유지하기 위한 추가 비용이 발생한다.
 
 * 개인정보와 같은 민감한 데이터를 주고 받아야한다면 HTTPS를 이용해야 하지만, 단순한 정보 조회 등만을 처리하고 있다면 HTTP를 이용하면 된다.
+
+## HTTP/1.1과 HTTP/2.0
+### HTTP/1.1 동작방식
+HTTP는 웹 상에서 Client(IE, Chrome, Firefox)와 Server(httpd, nginx, etc...)간 통신을 위한 Protocol이다.
+
+HTTP 1.1 프로토콜은 클라이언트와 서버간 통신을 위해 다음과 같은 과정을 거치게 된다.
+<img src="https://user-images.githubusercontent.com/33089715/121461032-0302a500-c9e9-11eb-8649-ef977075487d.png" width = "300">
++ 기본적으로 Connection당 하나의 요청을 처리 하도록 설계되어있다.
++ 따라서 동시 전송이 불가능하고 요청과 응답이 순차적으로 이루어지게 된다.
++ HTTP1.1의 단점은 다음과 같다.
+
+#### HOL(Head Of Line) Blocking - 특정 응답의 지연
++ HTTP/1.1의 connection당 하나의 요청처리를 개선할 수 있는 기법 중 pipelining이 존재하는데 이것은 하나의 Connection을 통해 다수 개의 파일을 요청/응답 받을수 있는 기법이다.
++ 이 pipelining의 문제점, 하나의 TCP 연결에서 3개의 이미지를 얻으려고 하는경우 HTTP의 요청 순서는 다음과 같다.
+```
+| --- a.png --- |
+
+            | --- b.png --- |
+
+
+                        | --- c.png --- |
+```
++ 첫 번째 이미지를 요청하고 응답받고 다음 이미지를 요청하게 되는데, 만약 첫 번째 이미지를 요청하고 응답이 지연되면 두, 세번째 이미지는 당연히 대기하게 되며 이와같은 현상을 **HTTP의 Head of Line Blocking**이라 부른다.
+
+#### RTT(Round Trip Time) 증가
++ http/1.1의 경우 일반적으로 하나의 connection에 하나의 요청을 처리한다.
++ 매 요청별로 connection을 만들게 되고 TCP 상에서 동작하는 HTTP의 특성상 3-way handshake가 반복적으로 일어나고 또한 불필요한 RTT 증가와 네트워크 지연을 초래하여 성능을 저하시킨다.
+
+#### 무거운 Header 구조(특히 Cookie)
++ http/1.1의 헤더에는 많은 메타정보들이 저장되어 있다.
++ 사용자가 방문한 웹페이지는 다수의 http 요청이 발생하게 되는데 이 경우에 매 요청시 마다 중복된 헤더값을 전송하게 되며 해당 domain에 설정된 cookie 정보도 매 요청시 마다 헤더에 포함되어 전송된다.
+
+### HTTP/2.0
+SPDY(스피디/speedy로 발음)라는 구글의 비표준 개방형 네트워크 프로토콜에 기반한다. 기존의 HTTP methods, status codes, semantics 개념들이 동일하게 호환된다.
++ 퍼포먼스 향상이라는 목적을 가지며, 다음과 같은 특징들이 있다.
+
+#### HTTP Header Data Compression(HTTP 헤더 데이터 압축)
++ 이전 Header의 내용과 중복되는 필드를 재전송 하지 않도록 하여 데이터를 절약한다.
++ 또한 기존에 HTTP Header가 Plain Text(평문)이었지만, HTTP/2에서는 Huffman Coding을 사용하는 HPACK이라는 Header 압축방식을 이용하여 데이터 전송 효율을 높였다.
+<img src="https://user-images.githubusercontent.com/33089715/121462120-0dbe3980-c9eb-11eb-948a-4b5cf86293ef.png" width = "300">
+> Huffman Coding 방식 : 데이터 문자의 빈도에 따라서 다른 길이의 부호를 사용하는 알고리즘
+
+
+#### Server Push
++ 클라이언트가 요청하지 않은 JavaScript, CSS, Font, 이미지 파일 등과 같이 필요하게 될 특정 파일들을 서버에서 단일 HTTP 요청 응답 시 함께 전송할 수 있다.
+
+
+#### HTTP1.x의 HOF Blocking 문제 해결
++ HTTP/1.1 까지는 한 번에 하나의 파일만 전송이 가능했다. 이로 인해 선행하는 파일의 전송이 늦어지면, 전체 파일 전송 시간이 늘어나는 문제가 발생했다.
++ HTTP/2에서는 여러 파일을 한번에 병렬 전송하여, 이러한 문제를 해결했다.
++ TCP 연결 하나로 여러 요청과 응답들을 병렬적으로 보낼 수 있다. 덕분에 웹사이트 로딩이 빨라진다.
++ 아래 이미지 처럼, 하나의 커넥션에서 여러 병렬 스트림(3개)이 존재 할 수 있다. stream이 뒤섞여서 전송될 경우, stream number를 이용해 수신측에서 재조합된다.
+   <img src="https://user-images.githubusercontent.com/33089715/121462373-77d6de80-c9eb-11eb-8342-ac5f6f0fa1ba.png" width = "300">
+
+#### Stream 우선순위
++ HTTP 메시지가 많은 개별 프레임으로 분할될 수 있고 여러 프레임을 다중화(Multiplexing)할 수 있게 되면서, 스트림의 우선순위를 지정할 필요가 생겼다.
++ 클라이언트는 우선순위 지정을 위해 '우선순위 지정 트리'를 사용하여 서버의 스트림처럼 우선 순위를 지정할 수 있다.
++ 서버는 우선순위가 높은 응답이 클라이언트에 우선적으로 전달될 수 있도록 대역폭을 설정한다.
 
 </br>
 
