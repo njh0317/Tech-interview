@@ -10,6 +10,8 @@
 ---
 
 ## 의존성 주입
+[**이해를 돕기 위한 글**](https://kotlinworld.com/64)
+
 **예시**
 
 + 클래스 `Computer`, `CPU`가 있다고 하자, 클래스 `Computer`가 `CPU`를 멤버로 가지고 있으면 이런 관계에서 `Computer`가 `CPU`에 대해 의존성을 가지고 있다고 말한다. 
