@@ -87,6 +87,7 @@
 * 라우팅, 흐름 제어, 프래그멘테이션(Fragmentation), 오류 제어, 인터네트워킹(InterNetworking) 등을 수행한다.
 * 논리적인 주소 구조(IP), 곧 네트워크 관리자가 직접 주소를 할당하는 구조를 가지며, 계층적이다.
 * 데이터 전송 단위는 Datagram(Packet)이다.
+* Forwarding, Routing
 
 ### 전송 계층 (Transport Layer)
 
